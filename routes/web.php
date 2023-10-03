@@ -19,11 +19,31 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canRegister' => Route::has('register')
     ]);
-});
+})->name('Inicio');
+
+Route::get('/about', function () {
+    return Inertia::render('About', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+})->name('about');
+
+Route::get('/bonos', function () {
+    return Inertia::render('Bonos', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+})->name('bonos');
+
+Route::get('/contacto', function () {
+    return Inertia::render('Contacto', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+})->name('contacto');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
