@@ -3,6 +3,8 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+
+
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -10,6 +12,8 @@ export default {
         './resources/js/**/*.vue',
     ],
 
+    darkMode: 'media',
+    
     theme: {
         extend: {
             fontFamily: {
@@ -18,5 +22,8 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require('flowbite/plugin')],
+
 };
+
+

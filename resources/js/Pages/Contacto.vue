@@ -12,7 +12,7 @@ defineProps({
 
 </script>
 <template>
-    <Head title="Sobre Nosotros" />
+    <Head title="Contacto" />
     <GuestLayout :canLogin="canLogin" :canRegister="canRegister" :propUser=$page.props.auth.user>
 
     </GuestLayout>
