@@ -26,7 +26,7 @@ function toggleMenu() {
 
 <template>
     <div
-        class="min-h-screen flex flex-col dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+        class="bg-dots-darker min-h-screen flex flex-col dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
     >
         <nav class="bg-white border-gray-200 dark:bg-gray-800">
             <div
