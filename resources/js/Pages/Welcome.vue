@@ -4,7 +4,8 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
-import arcades from "/Users/manue/Downloads/estacions.json";
+//import arcades from "/Users/Bemen3/Downloads/estacions.json";
+import axios from "axios";
 
 defineProps({
     canLogin: {
@@ -13,6 +14,12 @@ defineProps({
     canRegister: {
         type: Boolean,
     },
+});
+
+var arcades = ref();
+
+axios.get("/api/kudos").then((response) => {
+    arcades = response.data;
 });
 
 let zoom = ref(12);
