@@ -45,7 +45,7 @@ var currentEstacion = ref("");
                     v-if="currentEstacion == ''"
                     class="mb-2 text-3xl font-bold text-gray-900 dark:text-white"
                 >
-                    Elige tu punto de carga
+                    Elige un punto de carga
                 </h5>
                 <h5
                     v-else
@@ -57,7 +57,7 @@ var currentEstacion = ref("");
                     v-if="currentEstacion == ''"
                     class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"
                 >
-                    Carga tu vehículo con la red de carga más rápida del país
+                    Selecciona un punto de carga para ver su información actual
                 </p>
                 <p
                     v-else
