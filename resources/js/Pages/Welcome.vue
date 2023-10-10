@@ -4,7 +4,6 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 import { ref } from "vue";
-//import arcades from "/Users/Bemen3/Downloads/estacions.json";
 import axios from "axios";
 
 defineProps({
@@ -16,10 +15,10 @@ defineProps({
     },
 });
 
-var arcades = ref();
+var puntoCargaMapa = ref();
 
-axios.get("/api/kudos").then((response) => {
-    arcades = response.data;
+axios.get("/api/map").then((response) => {
+    puntoCargaMapa = response.data
 });
 
 let zoom = ref(12);
@@ -58,7 +57,7 @@ var currentEstacion = ref("");
                     v-else
                     class="mb-2 text-3xl font-bold text-gray-900 dark:text-white"
                 >
-                    {{ currentEstacion.NOM_ESTACIO }}
+                    {{ currentEstacion.ubicacion }}
                 </h5>
                 <p
                     v-if="currentEstacion == ''"
@@ -70,7 +69,7 @@ var currentEstacion = ref("");
                     v-else
                     class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"
                 >
-                    {{ currentEstacion.PICTO }}
+                    {{ currentEstacion.potencia }}
                 </p>
             </div>
 
@@ -87,9 +86,9 @@ var currentEstacion = ref("");
                         name="Stadia Maps Basemap"
                     ></l-tile-layer>
                     <l-marker
-                        v-for="arcade in arcades.features"
-                        :lat-lng="arcade.geometry.coordinates.reverse()"
-                        @click="currentEstacion = arcade.properties"
+                        v-for="punto in puntoCargaMapa"
+                        :lat-lng="[punto.latitud,punto.longitud]"
+                        @click="currentEstacion = punto"
                     ></l-marker>
                 </l-map>
             </div>
