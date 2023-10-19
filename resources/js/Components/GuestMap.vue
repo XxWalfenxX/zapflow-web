@@ -18,6 +18,11 @@ let zoom = ref(12);
 let center = ref([41.3732, 2.154]);
 
 var mapURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    mapURL =
+        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
+}
 </script>
 <template>
     <div

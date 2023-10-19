@@ -3,7 +3,6 @@ import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import "leaflet/dist/leaflet.css";
 import GuestMap from "@/Components/GuestMap.vue";
-import { ref } from "vue";
 
 defineProps({
     canLogin: {
@@ -13,13 +12,6 @@ defineProps({
         type: Boolean,
     },
 });
-
-
-
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    mapURL =
-        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
-}
 
 
 </script>
