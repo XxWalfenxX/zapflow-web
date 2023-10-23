@@ -6,19 +6,16 @@ export default {
         };
     },
     async created() {
-        const response = await fetch(
-            "/api/map"
-        );
+        const response = await fetch("/api/map");
         this.geojson = await response.json();
     },
 };
 </script>
 
 <script setup>
-import { LMap, LTileLayer, LGeoJson } from "@vue-leaflet/vue-leaflet";
-import { ref, onUpdated } from "vue";
+import { LMap, LTileLayer, LGeoJson, LMarker } from "@vue-leaflet/vue-leaflet";
+import { ref } from "vue";
 
-var puntoCargaMapa = ref();
 var currentEstacion = ref("");
 
 let zoom = ref(12);
@@ -76,7 +73,11 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
                     layer-type="base"
                     name="Stadia Maps Basemap"
                 ></l-tile-layer>
-                <l-geo-json :geojson="geojson"></l-geo-json>
+                <l-marker
+                    v-for="punto in geojson.features"
+                    :lat-lng="punto.geometry.coordinates.reverse()"
+                    @click="currentEstacion = punto.properties"
+                ></l-marker>
             </l-map>
         </div>
     </div>
