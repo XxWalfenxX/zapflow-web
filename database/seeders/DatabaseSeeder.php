@@ -52,5 +52,30 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'EcoOne', 'descripcion' => 'Suscripcion anual, para turismos furgonetas y motos', 'precio'=> 25],
         ]);
 
+        DB::table('asignar')->insert([
+            ['id_user' => 1, 'id_roles' => 1],
+            ['id_user' => 2, 'id_roles' => 1],
+            ['id_user' => 3, 'id_roles' => 1],
+            ['id_user' => 4, 'id_roles' => 1],
+            ['id_user' => 5, 'id_roles' => 1],
+            ['id_user' => 1, 'id_roles' => 6],
+            ['id_user' => 2, 'id_roles' => 6],
+        ]);
+
+        DB::table('cargar')->insert([
+            ['id_user' => 1, 'id_punto_carga' => 1],
+            ['id_user' => 2, 'id_punto_carga' => 2],
+            ['id_user' => 3, 'id_punto_carga' => 3],
+            ['id_user' => 4, 'id_punto_carga' => 4],
+            ['id_user' => 5, 'id_punto_carga' => 5],
+        ]);
+
+        DB::table('tener')->insert([
+            ['id_user' => 1, 'id_subscripciones' => 1, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+            ['id_user' => 2, 'id_subscripciones' => 2, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+            ['id_user' => 3, 'id_subscripciones' => 3, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+            ['id_user' => 4, 'id_subscripciones' => 4, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+            ['id_user' => 5, 'id_subscripciones' => 5, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+        ]);
     }
 }
