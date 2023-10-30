@@ -33,7 +33,7 @@ defineProps({
         :propUser="$page.props.auth.user"
     >
         <div
-            class="min-h-[80vh] flex flex-wrap gap-10 justify-center items-center sm:auto-rows-max mt-5"
+            class="min-h-[80vh] grid grid-cols-3 gap-5 place-items-center sm:grid-cols-3 mt-5 ml-5"
         >
             <BonoCard v-for="bono in bonos" :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio"/>
 
