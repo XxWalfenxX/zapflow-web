@@ -159,7 +159,7 @@ defineProps({
                         <SwitchLabel class="text-sm leading-6 text-gray-600">
                             Al seleccionar esto, usted acepta nuestra
                             {{ " " }}
-                            <a :href="route('privacy')" class="font-semibold text-indigo-600"
+                            <a href="#" class="font-semibold text-indigo-600"
                                 >política de privacidad</a
                             >.
                         </SwitchLabel>
