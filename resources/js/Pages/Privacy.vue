@@ -20,17 +20,17 @@ defineProps({
         <div class="flex mx-5 sm:mx-52 mt-10 flex-col dark:text-white">
             <h1 class="text-2xl font-bold">Política de privacidad</h1>
             <p>
-                El sitio web zapflow.com es propiedad de ZapFlow, que es un
+                El sitio web zapflow.es es propiedad de ZapFlow, que es un
                 controlador de datos de tus datos personales
             </p>
             <br />
             <p>
                 Hemos adoptado esta Política de privacidad, que determina cómo
-                procesamos la información recopilada por zapflow.com, que
+                procesamos la información recopilada por zapflow.es, que
                 también proporciona las razones por las que debemos recopilar
                 ciertos datos personales sobre ti. Por lo tanto, debes leer esta
                 Política de privacidad antes de usar el sitio web de
-                zapflow.com.
+                zapflow.es.
             </p>
             <br />
             <p>
@@ -42,7 +42,7 @@ defineProps({
                 Información personal que recopilamos:
             </h1>
             <p>
-                Cuando visitas zapflow.com, recopilamos automáticamente cierta
+                Cuando visitas zapflow.es, recopilamos automáticamente cierta
                 información sobre tu dispositivo, incluida información sobre tu
                 navegador web, dirección IP, zona horaria y algunas de las
                 cookies instaladas en tu dispositivo. Además, a medida que
@@ -79,7 +79,7 @@ defineProps({
                 Por ejemplo, no podrás recibir nuestro boletín ni contactarnos
                 directamente desde el sitio web. Los usuarios que no estén
                 seguros de qué información es obligatoria pueden ponerse en
-                contacto con nosotros a través de legal@zapflow.com.
+                contacto con nosotros a través de legal@zapflow.es.
             </p>
             <br />
             <h1 class="text-2xl font-bold">Tus derechos:</h1>
@@ -157,7 +157,7 @@ defineProps({
                 esta Política o deseas comunicarte con nosotros en relación con
                 cualquier asunto sobre los derechos individuales y tu
                 información personal, puedes enviarnos un correo electrónico a
-                legal@zapflow.com.
+                legal@zapflow.es.
             </p>
         </div>
     </GuestLayout>
