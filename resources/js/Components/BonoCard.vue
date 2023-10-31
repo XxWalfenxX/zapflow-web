@@ -1,4 +1,8 @@
+
+
 <script setup>
+import { CheckIcon } from "@heroicons/vue/20/solid";
+
 defineProps({
     nombre: {
         type: String,
@@ -10,27 +14,71 @@ defineProps({
         type: Number,
     },
 });
-
 </script>
 
 <template>
-
-    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-[32rem] ">
-        <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{{nombre}}</h5>
-        <div class="flex items-baseline text-gray-900 dark:text-white">
-            <span class="text-3xl font-semibold">€</span>
-            <span class="text-5xl font-extrabold tracking-tight">{{precio}}</span>
-            <span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/año</span>
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div
+            class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none"
+        >
+            <div class="p-8 sm:p-10 lg:flex-auto">
+                <h3
+                    class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    {{ nombre }}
+                </h3>
+                <div class="mt-10 flex items-center gap-x-4">
+                    <h4
+                        class="flex-none text-sm font-semibold leading-6 text-indigo-600"
+                    >
+                        ¿Que Incluye?
+                    </h4>
+                    <div class="h-px flex-auto bg-gray-100" />
+                </div>
+                <ul
+                    role="list"
+                    class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 dark:text-gray-200 sm:grid-cols-2 sm:gap-6"
+                >
+                    <li
+                        v-for="feature in descripcion"
+                        :key="feature"
+                        class="flex gap-x-3"
+                    >
+                        <CheckIcon
+                            class="h-6 w-5 flex-none text-indigo-600"
+                            aria-hidden="true"
+                        />
+                        {{ feature }}
+                    </li>
+                </ul>
+            </div>
+            <div
+                class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0"
+            >
+                <div
+                    class="rounded-2xl bg-gray-50 dark:bg-gray-800 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16"
+                >
+                    <div class="mx-auto max-w-xs px-8">
+                        <p
+                            class="mt-6 flex items-baseline justify-center gap-x-2"
+                        >
+                            <span
+                                class="text-5xl font-bold tracking-tight text-gray-900 dark:text-white"
+                                >€{{ precio }}</span
+                            >
+                            <span
+                                class="text-sm font-semibold leading-6 tracking-wide text-gray-600 dark:text-gray-300"
+                                >/año</span
+                            >
+                        </p>
+                        <a
+                            href="#"
+                            class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >Suscribirse</a
+                        >
+                    </div>
+                </div>
+            </div>
         </div>
-        <ul role="list" class="space-y-5 my-7">
-            <li class="flex space-x-3 items-center" v-for="item in descripcion">
-                <svg class="flex-shrink-0 w-4 h-4 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                </svg>
-                <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{item}}</span>
-            </li>
-        </ul>
-        <button type="button" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Choose plan</button>
     </div>
-
 </template>

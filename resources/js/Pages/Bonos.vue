@@ -9,6 +9,7 @@ export default {
         const response = await fetch("/api/bono");
         this.bonos = await response.json();
     },
+
 };
 </script>
 <script setup>
@@ -33,9 +34,9 @@ defineProps({
         :propUser="$page.props.auth.user"
     >
         <div
-            class="min-h-[80vh] grid grid-cols-3 gap-5 place-items-center sm:grid-cols-3 mt-5 ml-5"
+            class=" "
         >
-            <BonoCard v-for="bono in bonos" :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio"/>
+            <BonoCard v-for="bono in bonos" :key="bono.id" :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio"/>
 
         </div>
     </GuestLayout>

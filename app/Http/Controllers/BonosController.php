@@ -10,7 +10,7 @@ class BonosController extends Controller
         $bonos = DB::table('suscripciones')->get();
 
         foreach ($bonos as &$data ){
-            $data->descripcion = explode(",", $data->descripcion);
+            $data->descripcion = explode("/", $data->descripcion);
         }
 
         return  $bonos;
