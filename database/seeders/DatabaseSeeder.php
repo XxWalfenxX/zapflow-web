@@ -46,10 +46,10 @@ class DatabaseSeeder extends Seeder
 
         DB::table('suscripciones')->insert([
             ['nombre' => 'ZapFriend', 'descripcion' => 'Turismos/Furgonetas/Motos/Hasta 4 personas', 'precio'=> 50],
-            ['nombre' => 'ZapMoto', 'descripcion' => 'Exclusiva para motos', 'precio'=> 15],
-            ['nombre' => 'ZapPro', 'descripcion' => 'Turismos/Furgonetas/Motos/Carga a Ultrarápida', 'precio'=> 100],
-            ['nombre' => 'ZapMoto Pro', 'descripcion' => 'Explusiva para motos/Carga a Ultrarápida', 'precio'=> 45],
-            ['nombre' => 'ZapOne', 'descripcion' => 'Turismos/Furgonetas/Motos', 'precio'=> 25],
+            ['nombre' => 'ZapMoto', 'descripcion' => 'Exclusiva para motos/1 Persona', 'precio'=> 15],
+            ['nombre' => 'ZapPro', 'descripcion' => 'Turismos/Furgonetas/Motos/Carga a Ultrarápida/1 Persona', 'precio'=> 100],
+            ['nombre' => 'ZapMoto Pro', 'descripcion' => 'Explusiva para motos/Carga a Ultrarápida/1 Persona', 'precio'=> 45],
+            ['nombre' => 'ZapOne', 'descripcion' => 'Turismos/Furgonetas/Motos/1 Persona', 'precio'=> 25],
         ]);
 
         DB::table('asignar')->insert([
