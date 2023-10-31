@@ -74,7 +74,7 @@ if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
                     name="Stadia Maps Basemap"
                 ></l-tile-layer>
                 <l-marker
-                    v-for="punto in geojson.features"
+                    v-for="punto in geojson?.features"
                     :lat-lng="punto.geometry.coordinates.reverse()"
                     @click="currentEstacion = punto.properties"
                 ></l-marker>
