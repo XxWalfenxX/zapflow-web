@@ -17,7 +17,7 @@ defineProps({
         :canRegister="canRegister"
         :propUser="$page.props.auth.user"
     >
-        <div class="flex mx-5 sm:mx-52 mt-10 flex-col">
+        <div class="flex mx-5 sm:mx-52 mt-10 flex-col dark:text-white">
             <h1 class="text-2xl font-bold">Política de privacidad</h1>
             <p>
                 El sitio web zapflow.com es propiedad de ZapFlow, que es un
