@@ -108,7 +108,7 @@ defineProps({
                         <label
                             for="phone-number"
                             class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white"
-                            >Número de telefono</label
+                            >Número de teléfono</label
                         >
                         <div class="relative mt-2.5">
                             <input
