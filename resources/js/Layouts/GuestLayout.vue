@@ -153,7 +153,7 @@ function toggleMenu() {
                 <span
                     class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
                     >© 2023
-                    <a href="https://flowbite.com/" class="hover:underline"
+                    <a :href="route('Inicio')" class="hover:underline"
                         >ZapFlow™</a
                     >. Todos los derechos reservados.
                 </span>
@@ -169,7 +169,7 @@ function toggleMenu() {
                     </li>
                     <li>
                         <Link
-                            :href="route('Inicio')"
+                            :href="route('privacy')"
                             class="mr-4 hover:underline md:mr-6"
                             >Politica de Privacidad</Link
                         >

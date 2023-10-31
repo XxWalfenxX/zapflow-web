@@ -52,7 +52,7 @@ defineProps({
                                 name="first-name"
                                 id="first-name"
                                 autocomplete="given-name"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 dark:bg-gray-800"
                             />
                         </div>
                     </div>
@@ -68,7 +68,7 @@ defineProps({
                                 name="last-name"
                                 id="last-name"
                                 autocomplete="family-name"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white dark:bg-gray-800 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -84,7 +84,7 @@ defineProps({
                                 name="company"
                                 id="company"
                                 autocomplete="organization"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white dark:bg-gray-800 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -100,7 +100,7 @@ defineProps({
                                 name="email"
                                 id="email"
                                 autocomplete="email"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white dark:bg-gray-800 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -116,7 +116,7 @@ defineProps({
                                 name="phone-number"
                                 id="phone-number"
                                 autocomplete="tel"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white dark:bg-gray-800 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -131,7 +131,7 @@ defineProps({
                                 name="message"
                                 id="message"
                                 rows="4"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="dark:text-white dark:bg-gray-800 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-[#222836] placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
@@ -140,8 +140,8 @@ defineProps({
                             <Switch
                                 v-model="agreed"
                                 :class="[
-                                    agreed ? 'bg-indigo-600' : 'bg-gray-200',
-                                    'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+                                    agreed ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-800',
+                                    'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600',
                                 ]"
                             >
                                 <span class="sr-only">Aceptar las politicas</span>
@@ -156,21 +156,21 @@ defineProps({
                                 />
                             </Switch>
                         </div>
-                        <SwitchLabel class="text-sm leading-6 text-gray-600">
+                        <SwitchLabel class="text-sm leading-6 text-gray-600 ">
                             Al seleccionar esto, usted acepta nuestra
-                            {{ " " }}
-                            <a href="#" class="font-semibold text-indigo-600"
+
+                        </SwitchLabel>
+                        <a :href="route('privacy')" class="text-sm leading-6 font-semibold text-blue-600"
                                 >política de privacidad</a
                             >.
-                        </SwitchLabel>
                     </SwitchGroup>
                 </div>
                 <div class="mt-10">
                     <button
                         type="submit"
-                        class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        class="block w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     >
-                        Let's talk
+                        Enviar Mensaje
                     </button>
                 </div>
             </form>

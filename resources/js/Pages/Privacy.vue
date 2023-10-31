@@ -1,9 +1,6 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import "leaflet/dist/leaflet.css";
-import GuestMap from "@/Components/GuestMap.vue";
-
 defineProps({
     canLogin: {
         type: Boolean,
@@ -13,16 +10,14 @@ defineProps({
     },
 });
 
-
 </script>
-
 <template>
-    <Head title="Inicio" />
+    <Head title="Política de Privacidad" />
     <GuestLayout
         :canLogin="canLogin"
         :canRegister="canRegister"
         :propUser="$page.props.auth.user"
     >
-        <GuestMap></GuestMap>
+
     </GuestLayout>
 </template>

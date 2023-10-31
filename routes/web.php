@@ -48,6 +48,12 @@ Route::get('/contacto', function () {
     ]);
 })->name('contacto');
 
+Route::get('/privacy', function () {
+    return Inertia::render('Privacy', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register')
+    ]);
+})->name('privacy');
 
 
 Route::get('/dashboard', function () {
