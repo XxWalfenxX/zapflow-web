@@ -29,7 +29,7 @@ defineProps({
                 </h3>
                 <div class="mt-10 flex items-center gap-x-4">
                     <h4
-                        class="flex-none text-sm font-semibold leading-6 text-indigo-600"
+                        class="flex-none text-sm font-semibold leading-6 text-blue-600"
                     >
                         ¿Que Incluye?
                     </h4>
@@ -45,7 +45,7 @@ defineProps({
                         class="flex gap-x-3"
                     >
                         <CheckIcon
-                            class="h-6 w-5 flex-none text-indigo-600"
+                            class="h-6 w-5 flex-none text-blue-600"
                             aria-hidden="true"
                         />
                         {{ feature }}
@@ -73,7 +73,7 @@ defineProps({
                         </p>
                         <a
                             href="#"
-                            class="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            class="mt-10 block w-full rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                             >Suscribirse</a
                         >
                     </div>

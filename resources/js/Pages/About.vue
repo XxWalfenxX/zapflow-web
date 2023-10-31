@@ -201,7 +201,7 @@ const people = [
                                     {{ person.name }}
                                 </h3>
                                 <p
-                                    class="text-sm font-semibold leading-6 text-indigo-600"
+                                    class="text-sm font-semibold leading-6 text-blue-600"
                                 >
                                     {{ person.role }}
                                 </p>
