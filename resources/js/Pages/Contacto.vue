@@ -123,7 +123,7 @@ defineProps({
                     <div class="sm:col-span-2">
                         <label
                             for="message"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            class="block text-sm font-semibold leading-6 text-gray-900 dark:text-white"
                             >Mensaje</label
                         >
                         <div class="mt-2.5">
