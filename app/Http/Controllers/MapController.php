@@ -46,4 +46,15 @@ class MapController extends Controller
 
         return $geojson;
     }
+
+    public function ocupado()
+    {
+        $puntos = DB::table('cargar')
+            ->join('puntos_carga', 'cargar.id_punto_carga', '=', 'puntos_carga.id')
+            ->select('puntos_carga.id')
+            ->distinct()
+            ->get();
+
+            return $puntos;
+    }
 }

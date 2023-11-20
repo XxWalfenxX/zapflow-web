@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('map', [MapController::class, 'index'])->name('map');
+Route::get('map/ocupado', [MapController::class, 'ocupado'])->name('mapocupado');
 
 Route::get('bono', [BonosController::class, 'index'])->name('bono');
