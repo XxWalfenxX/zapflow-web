@@ -96,24 +96,6 @@ export default {
     },
 };
 </script>
-<!--
-<script setup>
-
-
-var currentEstacion = ref("");
-
-let zoom = ref(12);
-let center = ref([41.3732, 2.154]);
-
-var mapURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-
-let map = L.map('map').setView([51.505, -0.09], 13);
-
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    mapURL =
-        "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png";
-}
-</script>-->
 <template>
     <div
         class="flex flex-col md:flex-row gap-4 m-8 h-[80vh] text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
