@@ -27,12 +27,12 @@ Route::get('/', function () {
 
 
 
-Route::get('/about', function () {
-    return Inertia::render('About', [
+Route::get('/puntos', function () {
+    return Inertia::render('PuntosCarga', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register')
     ]);
-})->name('about');
+})->name('puntocarga');
 
 Route::get('/bonos', function () {
     return Inertia::render('Bonos', [

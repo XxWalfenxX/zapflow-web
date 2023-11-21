@@ -116,10 +116,10 @@ function toggleMenu() {
                         </li>
                         <li>
                             <NavLinkGuest
-                                :href="route('about')"
-                                :active="route().current('about')"
+                                :href="route('puntocarga')"
+                                :active="route().current('puntocarga')"
                             >
-                                Sobre Nosotros
+                                Puntos de Carga
                             </NavLinkGuest>
                         </li>
                         <li>
@@ -162,7 +162,7 @@ function toggleMenu() {
                 >
                     <li>
                         <Link
-                            :href="route('about')"
+                            :href="route('Inicio')"
                             class="mr-4 hover:underline md:mr-6"
                             >Sobre Nosotros</Link
                         >
