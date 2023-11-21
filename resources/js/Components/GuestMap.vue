@@ -140,7 +140,7 @@ export default {
 </template>
 <style scoped>
 #mapContainer {
-    width: 68vw;
-    height: 70vh;
+    width: 100%;
+    height: 100%;
 }
 </style>
