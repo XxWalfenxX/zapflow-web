@@ -165,7 +165,7 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'mensaje-personalizado',
+            'rule-name' => 'custom-message',
         ],
     ],
 
