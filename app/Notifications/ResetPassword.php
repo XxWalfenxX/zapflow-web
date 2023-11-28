@@ -2,31 +2,49 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class ResetPassword extends Notification
 {
-    use Queueable;
-
-    private string $token;
+    /**
+     * The password reset token.
+     *
+     * @var string
+     */
+    public $token;
 
     /**
-     * Create a new notification instance.
+     * The callback that should be used to create the reset password URL.
      *
-     * @param string $token
+     * @var (\Closure(mixed, string): string)|null
      */
-    public function __construct(string $token)
+    public static $createUrlCallback;
+
+    /**
+     * The callback that should be used to build the mail message.
+     *
+     * @var (\Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage)|null
+     */
+    public static $toMailCallback;
+
+    /**
+     * Create a notification instance.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function __construct($token)
     {
         $this->token = $token;
     }
 
     /**
-     * Get the notification's delivery channels.
+     * Get the notification's channels.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return array|string
      */
     public function via($notifiable)
     {
@@ -34,32 +52,76 @@ class ResetPassword extends Notification
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Build the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return MailMessage
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail( $notifiable ) {
-        $link = route("password.reset", ["token" => $this->token]);
-        return ( new MailMessage )
-            ->greeting("Hola,")
-            ->subject( 'Restablecer contraseña')
-            ->line( "Recibes este correo electrónico porque hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta.")
-            ->action( 'Restablecer ahora', $link)
-            ->line( 'Si no has solicitado el restablecimiento de tu contraseña puedes olvidar este mensaje.')
-            ->line( 'Este enlace caducará en 60 minutos.');
+    public function toMail($notifiable)
+    {
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+
+        return $this->buildMailMessage($this->resetUrl($notifiable));
     }
 
     /**
-     * Get the array representation of the notification.
+     * Get the reset password notification mail message for the given URL.
+     *
+     * @param  string  $url
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    protected function buildMailMessage($url)
+    {
+        return (new MailMessage)
+            ->greeting("Hola,")
+            ->subject(Lang::get('Notificación de restablecimiento de contraseña'))
+            ->line(Lang::get('Estás recibiendo este correo electrónico porque recibimos una solicitud para restablecer la contraseña de tu cuenta.'))
+            ->action(Lang::get('Restablecer contraseña'), $url)
+            ->line(Lang::get('Este enlace de restablecimiento de contraseña caducará en :count minutos.', ['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]))
+            ->line(Lang::get('Si no solicitaste restablecer la contraseña, no es necesario realizar ninguna otra acción.'))
+            ->salutation(Lang::get("Atentamente, :app-name",['app-name' => config('app.name')] ));
+
+    }
+
+    /**
+     * Get the reset URL for the given notifiable.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return string
      */
-    public function toArray($notifiable)
+    protected function resetUrl($notifiable)
     {
-        return [
-            //
-        ];
+        if (static::$createUrlCallback) {
+            return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+        }
+
+        return url(route('password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ], false));
+    }
+
+    /**
+     * Set a callback that should be used when creating the reset password button URL.
+     *
+     * @param  \Closure(mixed, string): string  $callback
+     * @return void
+     */
+    public static function createUrlUsing($callback)
+    {
+        static::$createUrlCallback = $callback;
+    }
+
+    /**
+     * Set a callback that should be used when building the notification mail message.
+     *
+     * @param  \Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage  $callback
+     * @return void
+     */
+    public static function toMailUsing($callback)
+    {
+        static::$toMailCallback = $callback;
     }
 }
