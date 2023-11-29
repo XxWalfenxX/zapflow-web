@@ -58,6 +58,11 @@ class DatabaseSeeder extends Seeder
             ['id_user' => 3, 'id_roles' => 1],
             ['id_user' => 4, 'id_roles' => 1],
             ['id_user' => 5, 'id_roles' => 1],
+            ['id_user' => 6, 'id_roles' => 1],
+            ['id_user' => 7, 'id_roles' => 1],
+            ['id_user' => 8, 'id_roles' => 1],
+            ['id_user' => 9, 'id_roles' => 1],
+            ['id_user' => 10, 'id_roles' => 1],
             ['id_user' => 1, 'id_roles' => 6],
             ['id_user' => 2, 'id_roles' => 6],
         ]);

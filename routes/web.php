@@ -56,14 +56,25 @@ Route::get('/privacy', function () {
 })->name('privacy');
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Rutas accesibles solo para usuarios con el rol 'admin'
+    Route::get('/admin', function () {
+        return Inertia::render('AdminDashboard');
+    })->name('admin');
 });
 
 require __DIR__ . '/auth.php';

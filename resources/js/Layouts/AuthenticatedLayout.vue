@@ -32,6 +32,10 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Mi Cuenta
                                 </NavLink>
+                                <NavLink v-if="$page.props.auth.user.roles.some(objeto => objeto.nombre === 'admin')" :href="route('admin')" :active="route().current('admin')">
+                                    Administrar
+                                </NavLink>
+
                             </div>
                         </div>
 
@@ -115,6 +119,9 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink v-if="$page.props.auth.user.roles.some(objeto => objeto.nombre === 'admin')" :href="route('admin')" :active="route().current('admin')">
+                            Administrar
+                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -145,6 +152,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Content -->
             <main>
+                <p class="dark:text-white"></p>
                 <slot />
             </main>
         </div>
