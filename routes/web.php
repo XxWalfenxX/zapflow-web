@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -60,11 +61,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-});
-
-
-
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -73,8 +69,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rutas accesibles solo para usuarios con el rol 'admin'
     Route::get('/admin', function () {
-        return Inertia::render('AdminDashboard');
+        return Inertia::render('Admin/AdminPanel');
     })->name('admin');
+    Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
 });
 
 require __DIR__ . '/auth.php';

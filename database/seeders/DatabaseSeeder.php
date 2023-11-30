@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => Hash::make('password'),
-                'created_at' => DB::raw('curdate()')
+                'created_at' => DB::raw('now()')
             ]);
             $iUsers++;
         }

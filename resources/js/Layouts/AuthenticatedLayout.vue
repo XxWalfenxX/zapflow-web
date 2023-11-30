@@ -32,7 +32,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Mi Cuenta
                                 </NavLink>
-                                <NavLink v-if="$page.props.auth.user.roles.some(objeto => objeto.nombre === 'admin')" :href="route('admin')" :active="route().current('admin')">
+                                <NavLink v-if="$page.props.auth.user.roles.some(objeto => objeto.nombre === 'admin')" :href="route('admin')" :active="route().current('admin*')">
                                     Administrar
                                 </NavLink>
 
