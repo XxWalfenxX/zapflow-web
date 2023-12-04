@@ -15,7 +15,7 @@ onMounted(() => {
     <Head title="Gestión Usuarios" />
 
     <AdminDashboard>
-        <div class="flex flex-col self-center justify-center items-center min-h-[65vh]">
+        <div class="flex flex-col self-center justify-center items-center min-h-[50vh]">
             <ApplicationLogo class="h-48"></ApplicationLogo>
             <h1 class="text-3xl font-bold">Administración de ZapFlow</h1>
             <span>Pulse una opción para emepezar</span>

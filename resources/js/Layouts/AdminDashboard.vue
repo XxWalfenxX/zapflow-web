@@ -24,7 +24,7 @@ function isActive(ruta) {
             <div class="mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <div class="flex flex-col md:flex-row gap-4 m-8 min-h-[70vh]">
+                        <div class="flex flex-col md:flex-row gap-4 m-8 min-h-[62vh]">
 
 
                             <div class="md:flex">
