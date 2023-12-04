@@ -1,12 +1,12 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { onMounted } from 'vue'
-import { initFlowbite } from 'flowbite'
-import AdminDashboard from '../../Layouts/AdminDashboard.vue';
 
-onMounted(() => {
-    initFlowbite();
-})
+import AdminDashboard from '../../Layouts/AdminDashboard.vue';
+import DataTable from 'datatables.net-vue3';
+import DataTablesCore from 'datatables.net';
+
+DataTable.use(DataTablesCore);
+
 
 defineProps({
     users: {
@@ -15,6 +15,11 @@ defineProps({
 
 });
 
+const data = [
+    [1, 2],
+    [3, 4],
+];
+
 </script>
 
 <template>
@@ -22,6 +27,15 @@ defineProps({
 
     <AdminDashboard>
         <h1 class="font-bold text-4xl mb-3">Gestionar Usuarios</h1>
+
+        <DataTable :data="data" class="display">
+            <thead>
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                </tr>
+            </thead>
+        </DataTable>
 
 
         <div class="relative overflow-x-auto">
@@ -66,7 +80,7 @@ defineProps({
                             {{ user.created_at }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ user.updated_at !==  null ? user.updated_at : 'No hay datos' }}
+                            {{ user.updated_at !== null ? user.updated_at : 'No hay datos' }}
                         </td>
                     </tr>
                 </tbody>
@@ -74,3 +88,6 @@ defineProps({
         </div>
     </AdminDashboard>
 </template>
+<style>
+@import 'datatables.net-dt';
+</style>
