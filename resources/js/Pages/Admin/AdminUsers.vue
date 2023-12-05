@@ -1,11 +1,16 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-
+import { onMounted } from 'vue';
 import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout.vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
+import DeleteCrudModal from '@/Components/DeleteCrudModal.vue';
+import { initFlowbite, Modal } from 'flowbite'
 
+onMounted(() => {
+    initFlowbite();
+})
 DataTable.use(DataTablesCore);
 
 defineProps({
@@ -95,14 +100,7 @@ const options = {
                                                         d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
                                                 </svg>
                                             </button>
-                                            <button type="button"
-                                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                                                <svg class="w-6 h-6 text-white" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
-                                                </svg></button>
+                                            <DeleteCrudModal></DeleteCrudModal>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -114,4 +112,6 @@ const options = {
         </div>
     </AuthenticatedLayout>
 </template>
-<style></style>
+<style>
+
+</style>
