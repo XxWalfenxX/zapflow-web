@@ -100,7 +100,8 @@ const options = {
                                                         d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
                                                 </svg>
                                             </button>
-                                            <DeleteCrudModal></DeleteCrudModal>
+                                            <DeleteCrudModal :key="`delete-modal-${user.id}`" :id="`${user.id}`">
+                                            </DeleteCrudModal>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,6 +113,4 @@ const options = {
         </div>
     </AuthenticatedLayout>
 </template>
-<style>
-
-</style>
+<style></style>
