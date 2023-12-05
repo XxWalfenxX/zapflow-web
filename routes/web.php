@@ -72,6 +72,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return Inertia::render('Admin/AdminDashboard');
     })->name('admin');
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
+    Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 require __DIR__ . '/auth.php';
