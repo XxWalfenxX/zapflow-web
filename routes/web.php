@@ -69,7 +69,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rutas accesibles solo para usuarios con el rol 'admin'
     Route::get('/admin', function () {
-        return Inertia::render('Admin/AdminPanel');
+        return Inertia::render('Admin/AdminDashboard');
     })->name('admin');
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
 });
