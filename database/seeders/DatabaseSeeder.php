@@ -76,11 +76,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('tener')->insert([
-            ['id_user' => 1, 'id_subscripciones' => 1, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
-            ['id_user' => 2, 'id_subscripciones' => 2, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
-            ['id_user' => 3, 'id_subscripciones' => 3, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
-            ['id_user' => 4, 'id_subscripciones' => 4, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
-            ['id_user' => 5, 'id_subscripciones' => 5, 'fecha_inicio' => '2023-10-10', 'fecha_fin' => NULL],
+            ['id_user' => 1, 'id_subscripciones' => 1, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')],
+            ['id_user' => 2, 'id_subscripciones' => 2, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')],
+            ['id_user' => 3, 'id_subscripciones' => 3, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')],
+            ['id_user' => 4, 'id_subscripciones' => 4, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')],
+            ['id_user' => 5, 'id_subscripciones' => 5, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')],
         ]);
     }
 }

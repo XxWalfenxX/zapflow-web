@@ -1,6 +1,53 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 import { Head } from '@inertiajs/vue3';
+
+
+const props = defineProps({
+    bonoInfo: {
+        type: Object,
+    },
+
+});
+
+
+let fechaFormateada = '';
+let porcentajeBarra = 'width: 0%';
+
+if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
+    const fecha_fin = new Date(props.bonoInfo[0].fecha_fin);
+
+    // Obtener la fecha actual
+    const fecha_actual = new Date();
+
+    // Calcular la diferencia en milisegundos
+    const diferencia_ms = fecha_fin - fecha_actual;
+
+    // Calcular la diferencia en días
+    const diferencia_dias = Math.ceil(diferencia_ms / (1000 * 60 * 60 * 24));
+
+    // Definir el límite superior para el porcentaje (por ejemplo, 100%)
+    const limite_superior = 100;
+
+    // Ajustar el porcentaje según la diferencia de días
+    const porcentaje = Math.max(0, Math.min((diferencia_dias / limite_superior) * 100, limite_superior));
+
+    // Actualizar la variable porcentajeBarra
+    porcentajeBarra = `width: ${porcentaje}%`;
+
+    // Formatear la fecha
+    const date_options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
+    fechaFormateada = fecha_fin.toLocaleDateString(undefined, date_options);
+}
+
+
+
+
 </script>
 
 <template>
@@ -18,18 +65,28 @@ import { Head } from '@inertiajs/vue3';
                         <div
                             class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700  w-3/4 h-3/4 flex flex-col justify-around">
 
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BONO_ACTUAL
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
+                                bonoInfo.length > 0 ? (bonoInfo[0].nombre === undefined ? 'No tienes suscripción activa' :
+                                    bonoInfo[0].nombre) : 'No tienes suscripción activa' }}
                             </h5>
 
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de caducidad:</p>
-
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div>
+                            <div v-if="fechaFormateada === undefined">
+                                <p class="dark:text-white">No tienes subscripción o ha caducado</p>
                             </div>
+                            <div v-else>
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de caducidad: {{
+                                    fechaFormateada }}</p>
+
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" :style="porcentajeBarra"></div>
+                                </div>
+                            </div>
+
+
                             <div class="flex items-end">
                                 <a href="#"
                                     class="justify-center w-full  mt-3 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Bonos disponibles
+                                    Mis Bonos
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
