@@ -21,6 +21,9 @@ class AdminUsersController extends Controller
     {
         $user = $request;
 
+        DB::table('asignar')->where('id_user', $user -> id)->delete();
+        DB::table('cargar')->where('id_user', $user -> id)->delete();
+        DB::table('tener')->where('id_user', $user -> id)->delete();
         DB::table('users')->delete($user -> id);
 
         return Redirect::to('/admin/users');
