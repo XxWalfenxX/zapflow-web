@@ -17,10 +17,10 @@ import { Head } from '@inertiajs/vue3';
                     <div class=" flex items-center w-1/2">
                         <div
                             class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700  w-3/4 h-3/4 flex flex-col justify-around">
-                            <a href="#">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BONO_ACTUAL
-                                </h5>
-                            </a>
+
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BONO_ACTUAL
+                            </h5>
+
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Fecha de caducidad:</p>
 
                             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
