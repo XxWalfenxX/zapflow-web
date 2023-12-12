@@ -53,10 +53,9 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
 <template>
     <Head title="Dashboard" />
 
-    <DashboardLayout pagina-header="Inicio">
+    <DashboardLayout :pagina-header="'Hola, '+ $page.props.auth.user.name">
         <div class="bg-gray-200 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
-                <h2 class="text-5xl">Hola, {{ $page.props.auth.user.name }}</h2>
                 <div class="flex flex-row gap-4 min-h-[20em] mt-10">
                     <div class="flex items-center justify-center w-full">
 

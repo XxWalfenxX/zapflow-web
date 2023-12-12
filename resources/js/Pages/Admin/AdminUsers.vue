@@ -7,6 +7,7 @@ import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
 import DeleteCrudModal from '@/Components/DeleteCrudModal.vue';
 import { initFlowbite, Modal } from 'flowbite'
+import AddUserCrudModal from '@/Components/AddUserCrudModal.vue';
 
 onMounted(() => {
     initFlowbite();
@@ -40,19 +41,8 @@ const options = {
 
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-
-
-
                         <div class="mb-3">
-                            <button type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                <svg class="w-3.5 h-3.5 me-2 text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 1v16M1 9h16" />
-                                </svg>
-                                Añadir Usuario
-                            </button>
+                            <AddUserCrudModal />
                         </div>
                         <div class="relative overflow-x-auto">
                             <DataTable :options="options" class="display w-full">
@@ -79,8 +69,7 @@ const options = {
                                             {{ user.email }}
                                         </td>
                                         <td>
-                                            {{ user.password.length > 15 ? user.password.slice(0, 15) + "..." :
-                                                user.password }}
+                                            ●●●●●●●●●●●●●●●●
                                         </td>
                                         <td>
                                             {{ user.created_at }}

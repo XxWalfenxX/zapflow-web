@@ -76,6 +76,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return Inertia::render('Admin/AdminDashboard');
     })->name('admin');
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
+    Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
 });
 
