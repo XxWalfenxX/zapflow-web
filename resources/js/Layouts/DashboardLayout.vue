@@ -14,7 +14,6 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="Dashboard" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -38,7 +37,7 @@ const props = defineProps({
 
                                     Inicio
                                 </DashboardLink>
-                                <DashboardLink :href="route('dashboard')" class="mb-3">
+                                <DashboardLink :href="route('vehiculos')" class="mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 -960 960 960"
                                         class="w-3.5 h-3.5 me-2">
                                         <path
@@ -46,7 +45,7 @@ const props = defineProps({
                                     </svg>
                                     Mis Vehículos
                                 </DashboardLink>
-                                <DashboardLink :href="route('dashboard')" class="mb-3">
+                                <DashboardLink :href="route('user.bonos')" class="mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="w-3.5 h-3.5 me-2">
                                         <path fill-rule="evenodd"

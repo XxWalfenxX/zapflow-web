@@ -1,6 +1,6 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 
 const props = defineProps({
@@ -26,11 +26,11 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
     // Calcular la diferencia en días
     const diferencia_dias = Math.ceil(diferencia_ms / (1000 * 60 * 60 * 24));
 
-    // Definir el límite superior para el porcentaje (por ejemplo, 100%)
-    const limite_superior = 100;
+    // Definir el límite de dias para el porcentaje (por ejemplo, 366 = 100%)
+    const limite_superior = 366;
 
     // Ajustar el porcentaje según la diferencia de días
-    const porcentaje = Math.max(0, Math.min((diferencia_dias / limite_superior) * 100, limite_superior));
+    const porcentaje = Math.max(0, Math.min((diferencia_dias / limite_superior) * 100, 100));
 
     // Actualizar la variable porcentajeBarra
     porcentajeBarra = `width: ${porcentaje}%`;
@@ -57,13 +57,27 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
         <div class="bg-gray-200 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <h2 class="text-5xl">Hola, {{ $page.props.auth.user.name }}</h2>
-                <div class="flex flex-row gap-4 justify-between min-h-[20em]">
-                    <div class="flex items-center">
-                        <img src="/img/zcard.png" alt="Z-Card">
-                    </div>
-                    <div class=" flex items-center w-1/2">
+                <div class="flex flex-row gap-4 min-h-[20em] mt-10">
+                    <div class="flex items-center justify-center w-full">
+
                         <div
-                            class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700  w-3/4 h-3/4 flex flex-col justify-around">
+                            class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
+                            <div
+                                class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute">
+                            </div>
+                            <div class="h-[46px] w-[3px] bg-gray-800 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
+                            <div class="h-[46px] w-[3px] bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
+                            <div class="h-[64px] w-[3px] bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
+                            <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-500">
+                                <div class="flex h-[572px] m-4">
+                                    <img src="/img/zcard.png" alt="Z-Card" class="object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" flex items-center justify-center w-full">
+                        <div
+                            class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700  w-3/4 h-1/2 flex flex-col justify-around">
 
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{
                                 bonoInfo.length > 0 ? (bonoInfo[0].nombre === undefined ? 'No tienes suscripción activa' :
@@ -84,7 +98,7 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
 
 
                             <div class="flex items-end">
-                                <a href="#"
+                                <Link :href="route('user.bonos')"
                                     class="justify-center w-full  mt-3 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Mis Bonos
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
@@ -92,7 +106,7 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                     </svg>
-                                </a>
+                                </Link>
                             </div>
 
                         </div>

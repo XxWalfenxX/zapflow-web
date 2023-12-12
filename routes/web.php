@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserBonosController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -60,6 +61,10 @@ Route::get('/privacy', function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
+    Route::get('/mis-vehiculos', function(){
+        return Inertia::render('User/Vehiculos');
+    })->name('vehiculos');
+    Route::get('/mis-bonos', [UserBonosController::class, 'create'])->name('user.bonos');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
