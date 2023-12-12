@@ -28,7 +28,6 @@ const estaSuscrito = (bonoId) => {
 
         diferenciaEnDias = Math.round(diferenciaEnDias);
 
-        console.log(diferenciaEnDias <= 0);
         if (diferenciaEnDias <= 0) {
             return true
         }

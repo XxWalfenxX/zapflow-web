@@ -24,7 +24,7 @@ defineProps({
 
 <template>
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+        <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-500 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
             <div class="p-8 sm:p-10 lg:flex-auto">
                 <h3 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {{ nombre }}
@@ -33,7 +33,7 @@ defineProps({
                     <h4 class="flex-none text-sm font-semibold leading-6 text-blue-600">
                         ¿Que Incluye?
                     </h4>
-                    <div class="h-px flex-auto bg-gray-100" />
+                    <div class="h-px flex-auto bg-gray-500" />
                 </div>
                 <ul role="list"
                     class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 dark:text-gray-200 sm:grid-cols-2 sm:gap-6">
