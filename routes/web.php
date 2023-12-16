@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBonosController;
+use App\Http\Controllers\UserBonosHistoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         return Inertia::render('User/Vehiculos');
     })->name('vehiculos');
     Route::get('/mis-bonos', [UserBonosController::class, 'create'])->name('user.bonos');
+    Route::get('/mis-compras', [UserBonosHistoryController::class, 'create'])->name('user.bonosComprados');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -77,6 +79,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     })->name('admin');
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
     Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
+    Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
 });
 

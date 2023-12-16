@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha_fin')->nullable();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_subscripciones')->references('id')->on('suscripciones')->onDelete('cascade');
-            $table->primary(['id_user', 'id_subscripciones']);
+            $table->primary(['id_user', 'id_subscripciones', 'fecha_inicio']);
         });
     }
 

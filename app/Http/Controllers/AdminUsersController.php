@@ -10,15 +10,14 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
 class AdminUsersController extends Controller
 {
-    public function create(): Response{
+    public function create(): Response
+    {
         return Inertia::render('Admin/AdminUsers', [
             'users' => DB::table('users')->get()
         ]);
@@ -28,10 +27,10 @@ class AdminUsersController extends Controller
     {
         $user = $request;
 
-        DB::table('asignar')->where('id_user', $user -> id)->delete();
-        DB::table('cargar')->where('id_user', $user -> id)->delete();
-        DB::table('tener')->where('id_user', $user -> id)->delete();
-        DB::table('users')->delete($user -> id);
+        DB::table('asignar')->where('id_user', $user->id)->delete();
+        DB::table('cargar')->where('id_user', $user->id)->delete();
+        DB::table('tener')->where('id_user', $user->id)->delete();
+        DB::table('users')->delete($user->id);
 
         return Redirect::to('/admin/users');
     }
@@ -40,7 +39,7 @@ class AdminUsersController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -53,6 +52,21 @@ class AdminUsersController extends Controller
         $user->roles()->attach(1);
 
         event(new Registered($user));
+
+        return Redirect::to('/admin/users');
+    }
+
+    public function udpate(Request $request): RedirectResponse
+    {
+        if ($request->password == null || $request->password == '') {
+            DB::table('users')
+                ->where('id', $request->id)
+                ->update(['name' => $request->name, 'email' => $request->email, 'updated_at' => DB::raw('CURRENT_TIMESTAMP()')]);
+        } else {
+            DB::table('users')
+                ->where('id', $request->id)
+                ->update(['name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password), 'updated_at' => DB::raw('CURRENT_TIMESTAMP()')]);
+        }
 
         return Redirect::to('/admin/users');
     }
