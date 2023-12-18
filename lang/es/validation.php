@@ -145,7 +145,7 @@ return [
     'starts_with' => 'El campo :attribute debe comenzar con alguno de los siguientes: :values.',
     'string' => 'El campo :attribute debe ser una cadena de texto.',
     'timezone' => 'El campo :attribute debe ser una zona horaria válida.',
-    'unique' => 'El :attribute ya ha sido tomado.',
+    'unique' => 'El :attribute ya está en uso.',
     'uploaded' => 'La carga del archivo :attribute falló.',
     'uppercase' => 'El campo :attribute debe estar en mayúsculas.',
     'url' => 'El campo :attribute debe ser una URL válida.',

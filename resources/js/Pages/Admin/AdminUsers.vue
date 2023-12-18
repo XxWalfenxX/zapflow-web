@@ -5,10 +5,10 @@ import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout.vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
-import DeleteCrudModal from '@/Components/DeleteCrudModal.vue';
+import DeleteCrudModal from '@/Components/Modal/DeleteCrudModal.vue';
 import { initFlowbite, Modal } from 'flowbite'
-import AddUserCrudModal from '@/Components/AddUserCrudModal.vue';
-import EditUserCrudModal from '@/Components/EditUserCrudModal.vue';
+import AddUserCrudModal from '@/Components/Modal/Users/AddUserCrudModal.vue';
+import EditUserCrudModal from '@/Components/Modal/Users/EditUserCrudModal.vue';
 
 onMounted(() => {
     initFlowbite();
