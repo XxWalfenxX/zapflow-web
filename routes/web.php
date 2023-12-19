@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPuntosCargaController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
@@ -81,6 +82,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
     Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
 });
 
 require __DIR__ . '/auth.php';

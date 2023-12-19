@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root {
     --dt-row-selected: 229, 231, 235;
-    --dt-row-selected-text: 255, 255, 255;
+    --dt-row-selected-text: 0, 0, 0;
     --dt-row-selected-link: 9, 10, 11;
     --dt-row-stripe: 235, 239, 245;
     --dt-row-hover: 0, 0, 0;
@@ -576,6 +576,11 @@ table.dataTable td {
     clear: both;
     float: left;
     padding-top: 0.755em;
+}
+
+.dataTables_wrapper .dataTables_info .select-info {
+    display: flex;
+    flex-direction: column;
 }
 .dataTables_wrapper .dataTables_paginate {
     float: right;
