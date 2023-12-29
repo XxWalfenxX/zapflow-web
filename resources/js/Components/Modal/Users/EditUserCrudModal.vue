@@ -51,7 +51,7 @@ const submit = () => {
 
 <template>
     <!-- Modal toggle -->
-    <button type="button" id="updateUserButton" :data-modal-target="`updateModal-${props.id}`"
+    <button type="button" :data-modal-target="`updateModal-${props.id}`"
         :data-modal-toggle="`updateModal-${props.id}`"
         class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -138,8 +138,4 @@ const submit = () => {
         </div>
     </div>
 </template>
-<style>
-.bg-gray-900.bg-opacity-50.dark\:bg-opacity-80.fixed.inset-0.z-40 {
-    opacity: 0.2;
-}
-</style>
+
