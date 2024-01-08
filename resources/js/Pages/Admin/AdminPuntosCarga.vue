@@ -1,14 +1,14 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout.vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
 import DeleteCrudModal from '@/Components/Modal/DeleteCrudModal.vue';
-import { initFlowbite, Modal } from 'flowbite'
-import AddUserCrudModal from '@/Components/Modal/Users/AddUserCrudModal.vue';
-import EditUserCrudModal from '@/Components/Modal/Users/EditUserCrudModal.vue';
+import { initFlowbite } from 'flowbite'
+import AddPuntoCrudModal from '@/Components/Modal/PuntosCarga/AddPuntoCrudModal.vue'
+import EditPuntoCrudModal from '@/Components/Modal/PuntosCarga/EditPuntoCrudModal.vue';
 import 'leaflet/dist/leaflet.css';
 import VerMapaPunto from '@/Components/Modal/PuntosCarga/VerMapaPunto.vue';
 
@@ -16,12 +16,6 @@ import VerMapaPunto from '@/Components/Modal/PuntosCarga/VerMapaPunto.vue';
 onMounted(() => {
     initFlowbite();
 })
-
-onBeforeUnmount(() => {
-    if (map.value) {
-        map.value.remove();
-    }
-});
 
 DataTable.use(DataTablesCore);
 
@@ -55,7 +49,7 @@ const options = {
                     <div class="p-6 text-gray-900 dark:text-gray-100">
 
                         <div class="mb-3">
-                            <!--<AddUserCrudModal />-->
+                            <AddPuntoCrudModal />
                         </div>
 
                         <div class="w-full">
@@ -73,7 +67,7 @@ const options = {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="punto in puntos_carga" @click="showOnMap(punto)">
+                                    <tr v-for="punto in puntos_carga">
                                         <th>
                                             {{ punto.id }}
                                         </th>
@@ -103,7 +97,7 @@ const options = {
                                         </td>
                                         <td>
                                             <VerMapaPunto :punto="punto"/>
-                                            <EditUserCrudModal />
+                                            <EditPuntoCrudModal />
                                             <DeleteCrudModal :key="`delete-modal-${punto.id}`" :id="`${punto.id}`">
                                             </DeleteCrudModal>
                                         </td>

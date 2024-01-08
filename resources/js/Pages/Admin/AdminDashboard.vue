@@ -9,9 +9,6 @@ onMounted(() => {
     initFlowbite();
 })
 
-function isActive(ruta) {
-    return route().current(ruta) ? 'w-4 h-4 me-2 text-white' : 'w-4 h-4 me-2 text-gray-800 dark:text-white'
-}
 
 </script>
 
