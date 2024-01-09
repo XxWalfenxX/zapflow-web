@@ -80,7 +80,7 @@ const options = {
                                         </td>
                                         <td>
                                             <EditUserCrudModal :key="`update-modal-${user.id}`" :id="`${user.id}`" :nombre="user.name" :email="user.email"/>
-                                            <DeleteCrudModal :key="`delete-modal-${user.id}`" :id="`${user.id}`">
+                                            <DeleteCrudModal :key="`delete-modal-${user.id}`" :id="`${user.id}`" url="admin.users.destroy">
                                             </DeleteCrudModal>
                                         </td>
                                     </tr>

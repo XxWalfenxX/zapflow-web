@@ -22,4 +22,25 @@ class AdminPuntosCargaController extends Controller
             'puntos_carga' => DB::table('puntos_carga')->get()
         ]);
     }
+    public function store(Request $request): RedirectResponse
+    {
+        // Convierte la fecha al formato de tiempo UNIX
+        $fecha_unix = strtotime($request->ultimo_mantenimiento);
+
+        // Formatea la fecha para MySQL
+        $fecha_mysql = date("Y-m-d", $fecha_unix);
+
+        DB::table('puntos_carga')->insertGetId(
+            ['latitud' => $request->latitud, 'longitud' => $request->longitud, 'ubicacion' => $request->ubicacion, 'potencia' => $request->potencia, 'funciona' => $request->funciona, 'ultimo_mantenimiento' => $fecha_mysql]
+        );
+
+        return Redirect::to('/admin/puntos-carga');
+    }
+    public function destroy(Request $request): RedirectResponse
+    {
+        DB::table('cargar')->where('id_punto_carga', $request->id)->delete();
+        DB::table('puntos_carga')->delete($request->id);
+
+        return Redirect::to('/admin/puntos-carga');
+    }
 }

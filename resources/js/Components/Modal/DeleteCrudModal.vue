@@ -8,7 +8,7 @@ onMounted(() => {
     initFlowbite();
 })
 
-const props = defineProps(['id', 'active']);
+const props = defineProps(['id', 'url']);
 
 const form = useForm({
     id: '',
@@ -16,7 +16,7 @@ const form = useForm({
 
 const deleteUser = (id) => {
     form.id = id
-    form.delete(route('admin.users.destroy'), {
+    form.delete(route(props.url), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
         onFinish: () => form.reset(),

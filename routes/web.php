@@ -83,6 +83,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
+    Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');
+    Route::delete('/admin/puntos-carga', [AdminPuntosCargaController::class, 'destroy'])->name('admin.puntosc.destroy');
 });
 
 require __DIR__ . '/auth.php';
