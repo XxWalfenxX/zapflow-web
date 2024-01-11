@@ -97,7 +97,7 @@ const options = {
                                         </td>
                                         <td>
                                             <VerMapaPunto :punto="punto"/>
-                                            <EditPuntoCrudModal />
+                                            <EditPuntoCrudModal :punto="punto"/>
                                             <DeleteCrudModal :key="`delete-modal-${punto.id}`" :id="`${punto.id}`" url="admin.puntosc.destroy">
                                             </DeleteCrudModal>
                                         </td>
