@@ -89,6 +89,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/bonos',[AdminBonosController::class, 'create'])->name('admin.bonos');
     Route::delete('/admin/bonos', [AdminBonosController::class, 'destroy'])->name('admin.bonos.destroy');
     Route::post('/admin/bonos',[AdminBonosController::class, 'store'])->name('admin.bonos.store');
+    Route::patch('/admin/bonos',[AdminBonosController::class, 'udpate'])->name('admin.bonos.update');
 });
 
 require __DIR__ . '/auth.php';

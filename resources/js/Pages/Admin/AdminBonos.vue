@@ -8,7 +8,7 @@ import 'datatables.net-responsive';
 import DeleteCrudModal from '@/Components/Modal/DeleteCrudModal.vue';
 import { initFlowbite } from 'flowbite'
 import AdminBonos from '@/Components/Modal/Bonos/AddBonos.vue';
-import EditUserCrudModal from '@/Components/Modal/Users/EditUserCrudModal.vue';
+import EditBonosModal from '@/Components/Modal/Bonos/EditBonosModal.vue';
 
 onMounted(() => {
     initFlowbite();
@@ -72,10 +72,10 @@ props.bonos?.map((bono) => {
                                             {{ bono.descripcion }}
                                         </td>
                                         <td>
-                                            {{ bono.precio }}
+                                            {{ bono.precio }}€
                                         </td>
                                         <td>
-                                            <EditUserCrudModal :key="`update-modal-${bono.id}`" :id="`${bono.id}`" :nombre="bono.name" :email="bono.nombre"/>
+                                            <EditBonosModal :bono="bono"/>
                                             <DeleteCrudModal :key="`delete-modal-${bono.id}`" :id="`${bono.id}`" url="admin.bonos.destroy">
                                             </DeleteCrudModal>
                                         </td>

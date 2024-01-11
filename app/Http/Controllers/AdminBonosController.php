@@ -36,6 +36,16 @@ class AdminBonosController extends Controller
         return Redirect::to('/admin/bonos');
     }
 
+    public function udpate(Request $request): RedirectResponse
+    {
+        $res = implode('/', $request->des);
+        DB::table('suscripciones')
+                ->where('id', $request->id)
+                ->update(['nombre' => $request->name, 'descripcion' => $res, 'precio' => $request->precio]);
+
+        return Redirect::to('/admin/bonos');
+    }
+
 
     public function destroy(Request $request): RedirectResponse
     {
