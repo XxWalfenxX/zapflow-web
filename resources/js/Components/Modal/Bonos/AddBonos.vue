@@ -17,7 +17,7 @@ const form = useForm({
 
 const submit = () => {
     form.des = additionalDescriptions.value
-    form.post(route('admin.users.store'), {
+    form.post(route('admin.bonos.store'), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
         onFinish: () => form.reset(),
@@ -35,6 +35,13 @@ const additionalDescriptions = ref([]);
 
 const addDesc = () => {
     additionalDescriptions.value.push('');
+}
+
+const eliminarDes = (index) => {
+    if (index >= 0 && index < additionalDescriptions.value.length) {
+    additionalDescriptions.value.splice(index, 1);
+    forceUpdate();
+  }
 }
 
 </script>
@@ -114,6 +121,7 @@ const addDesc = () => {
                                         v-model="additionalDescriptions[index]"
                                         class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         required>
+                                    <button @click.prevent="">X</button>
                                 </div>
                             </div>
 
@@ -132,7 +140,7 @@ const addDesc = () => {
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Agregar Usuario
+                        Agregar Bono
                     </button>
                     <button @click="resetForm"
                         class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">

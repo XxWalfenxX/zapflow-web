@@ -88,6 +88,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/puntos-carga', [AdminPuntosCargaController::class, 'destroy'])->name('admin.puntosc.destroy');
     Route::get('/admin/bonos',[AdminBonosController::class, 'create'])->name('admin.bonos');
     Route::delete('/admin/bonos', [AdminBonosController::class, 'destroy'])->name('admin.bonos.destroy');
+    Route::post('/admin/bonos',[AdminBonosController::class, 'store'])->name('admin.bonos.store');
 });
 
 require __DIR__ . '/auth.php';
