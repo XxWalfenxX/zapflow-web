@@ -11,12 +11,12 @@ onMounted(() => {
 
 const form = useForm({
     name: '',
-    des: '',
+    des: [],
     precio: '',
 });
 
 const submit = () => {
-    form.password_confirmation = form.password
+    form.des = additionalDescriptions.value
     form.post(route('admin.users.store'), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
