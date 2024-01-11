@@ -19,7 +19,7 @@ onMounted(() => {
 
 DataTable.use(DataTablesCore);
 
-defineProps({
+const props = defineProps({
     puntos_carga: {
         type: Object,
     },
@@ -33,6 +33,16 @@ const options = {
     }
 };
 
+
+const formatDate  = (dateString, index) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');;
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    props.puntos_carga[index].ultimo_mantenimiento = `${day}-${month}-${year}`
+
+    return `${day}-${month}-${year}`;
+  }
 
 </script>
 
@@ -67,7 +77,7 @@ const options = {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="punto in puntos_carga">
+                                    <tr v-for="(punto, index) in puntos_carga">
                                         <th>
                                             {{ punto.id }}
                                         </th>
@@ -81,7 +91,7 @@ const options = {
                                             {{ punto.ubicacion }}
                                         </td>
                                         <td>
-                                            {{ punto.potencia }}
+                                            {{ punto.potencia }} kW
                                         </td>
                                         <td>
                                             <input type="checkbox" v-if="punto.funciona === 1"
@@ -93,7 +103,7 @@ const options = {
                                         </td>
                                         <td>
                                             <p v-if="punto.ultimo_mantenimiento === null">No hay datos</p>
-                                            <p v-else>{{ punto.ultimo_mantenimiento }}</p>
+                                            <p v-else>{{ formatDate(punto.ultimo_mantenimiento, index)  }}</p>
                                         </td>
                                         <td>
                                             <VerMapaPunto :punto="punto"/>

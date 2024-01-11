@@ -86,6 +86,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
     Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');
     Route::delete('/admin/puntos-carga', [AdminPuntosCargaController::class, 'destroy'])->name('admin.puntosc.destroy');
+    Route::patch('/admin/puntos-carga', [AdminPuntosCargaController::class, 'udpate'])->name('admin.puntosc.update');
     Route::get('/admin/bonos',[AdminBonosController::class, 'create'])->name('admin.bonos');
     Route::delete('/admin/bonos', [AdminBonosController::class, 'destroy'])->name('admin.bonos.destroy');
     Route::post('/admin/bonos',[AdminBonosController::class, 'store'])->name('admin.bonos.store');

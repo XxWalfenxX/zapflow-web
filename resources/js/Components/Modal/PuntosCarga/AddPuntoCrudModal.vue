@@ -48,23 +48,26 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 let marcador = null;
 const createMaplayer = () => {
     setTimeout(() => {
-        map.value = L.map(`addNewPunto`).setView([41.3732, 2.154], 12);
-        L.tileLayer(mapURL).addTo(map.value);
+        if (map.value == null) {
+            map.value = L.map(`addNewPunto`).setView([41.3732, 2.154], 12);
+            L.tileLayer(mapURL).addTo(map.value);
 
 
-        map.value.on('click', function (e) {
-            if (marcador) {
-                map.value.removeLayer(marcador);
-            }
-            form.latitud = e.latlng.lat
-            form.longitud = e.latlng.lng
-            marcador = new L.Marker([e.latlng.lat, e.latlng.lng], {draggable: true}).addTo(map.value)
-            marcador.on('dragend', function (e) {
-                let position = marcador.getLatLng();
-                form.latitud = position.lat
-                form.longitud = position.lng
+            map.value.on('click', function (e) {
+                if (marcador) {
+                    map.value.removeLayer(marcador);
+                }
+                form.latitud = e.latlng.lat
+                form.longitud = e.latlng.lng
+                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map.value)
+                marcador.on('dragend', function (e) {
+                    let position = marcador.getLatLng();
+                    form.latitud = position.lat
+                    form.longitud = position.lng
+                })
             })
-        })
+        }
+
     }, 0);
 
 };

@@ -1,9 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import InputError from '@/Components/InputError.vue';
 import { initFlowbite } from 'flowbite'
 import { useForm } from '@inertiajs/vue3';
-import { IconRefresh } from '@tabler/icons-vue';
+import { IconEdit } from '@tabler/icons-vue';
 import L from 'leaflet';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
@@ -15,10 +14,17 @@ onMounted(() => {
     form.longitud = props.punto.longitud
     form.ubicacion = props.punto.ubicacion
     form.potencia = props.punto.potencia
-    form.funciona = props.punto.potencia
-    form.ultimo_mantenimiento = props.punto.ultimo_mantenimiento
-    dateValue.value = new Date(props.punto.ultimo_mantenimiento)
-    console.log(dateValue.value);
+    if (props.punto.funciona === 1) {
+        form.funciona = true
+    } else {
+        form.funciona = false
+    }
+
+    if (props.punto.ultimo_mantenimiento != null) {
+        form.ultimo_mantenimiento = props.punto.ultimo_mantenimiento
+        dateValue.value = props.punto.ultimo_mantenimiento
+    }
+
 })
 
 const form = useForm({
@@ -34,19 +40,15 @@ const form = useForm({
 const props = defineProps(['punto'])
 
 const submit = () => {
-    form.ultimo_mantenimiento = dateValue.value[0]
-    form.post(route('admin.puntosc.store'), {
+    form.ultimo_mantenimiento = dateValue.value
+    console.log(form.funciona);
+    
+    form.patch(route('admin.puntosc.update'), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
         onFinish: () => form.reset(),
     });
 };
-
-const resetForm = () => {
-    form.reset()
-    form.errors = {}
-}
-
 
 let map = ref(null);
 let mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -60,27 +62,29 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 let marcador = null;
 const createMaplayer = () => {
     setTimeout(() => {
-        map.value = L.map(`mapEditContainer-${props.punto.id}`).setView([props.punto.latitud, props.punto.longitud], 14);
-        L.tileLayer(mapURL).addTo(map.value);
-        marcador = new L.Marker([props.punto.latitud, props.punto.longitud], { draggable: true }).addTo(map.value)
+        if (map.value == null) {
+            map.value = L.map(`mapEditContainer-${props.punto.id}`).setView([props.punto.latitud, props.punto.longitud], 14);
+            L.tileLayer(mapURL).addTo(map.value);
+            marcador = new L.Marker([props.punto.latitud, props.punto.longitud], { draggable: true }).addTo(map.value)
 
-        map.value.on('click', function (e) {
-            if (marcador) {
-                map.value.removeLayer(marcador);
-            }
-            form.latitud = e.latlng.lat
-            form.longitud = e.latlng.lng
-            marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map.value)
-            marcador.on('dragend', function (e) {
-                let position = marcador.getLatLng();
-                form.latitud = position.lat
-                form.longitud = position.lng
+            map.value.on('click', function (e) {
+                if (marcador) {
+                    map.value.removeLayer(marcador);
+                }
+                form.latitud = e.latlng.lat
+                form.longitud = e.latlng.lng
+                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map.value)
+                marcador.on('dragend', function (e) {
+                    let position = marcador.getLatLng();
+                    form.latitud = position.lat
+                    form.longitud = position.lng
+                })
             })
-        })
+        }
     }, 0);
 
 };
-const dateValue = ref([]);
+const dateValue = ref('');
 const formatter = ref({
     date: 'DD-MM-YYYY',
     month: 'MMM',
@@ -91,7 +95,8 @@ const formatter = ref({
 
 <template>
     <!-- Modal toggle -->
-    <button type="button" :data-modal-target="`updateModal-${props.punto.id}`" :data-modal-toggle="`updateModal-${props.punto.id}`" @click="createMaplayer"
+    <button type="button" :data-modal-target="`updateModal-${props.punto.id}`"
+        :data-modal-toggle="`updateModal-${props.punto.id}`" @click="createMaplayer"
         class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 18">
@@ -111,7 +116,7 @@ const formatter = ref({
                 <!-- Modal header -->
                 <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Agregar Punto de Carga
+                        Editar Punto de Carga
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -179,18 +184,8 @@ const formatter = ref({
 
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Agregar Punto de Carga
-                    </button>
-                    <button @click="resetForm"
-                        class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
-                        <IconRefresh class="mr-1 -ml-1 w-6 h-6" />
-                        Limpiar
+                        <IconEdit class="mr-1 -ml-1 w-6 h-6" />
+                        Editar Bono
                     </button>
                 </form>
             </div>

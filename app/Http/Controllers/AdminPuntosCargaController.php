@@ -24,11 +24,16 @@ class AdminPuntosCargaController extends Controller
     }
     public function store(Request $request): RedirectResponse
     {
-        // Convierte la fecha al formato de tiempo UNIX
-        $fecha_unix = strtotime($request->ultimo_mantenimiento);
+        $fecha_mysql = null;
 
-        // Formatea la fecha para MySQL
-        $fecha_mysql = date("Y-m-d", $fecha_unix);
+        if ($request->ultimo_mantenimiento) {
+            // Convierte la fecha al formato de tiempo UNIX
+            $fecha_unix = strtotime($request->ultimo_mantenimiento);
+
+            // Formatea la fecha para MySQL
+            $fecha_mysql = date("Y-m-d", $fecha_unix);
+        }
+
 
         DB::table('puntos_carga')->insertGetId(
             ['latitud' => $request->latitud, 'longitud' => $request->longitud, 'ubicacion' => $request->ubicacion, 'potencia' => $request->potencia, 'funciona' => $request->funciona, 'ultimo_mantenimiento' => $fecha_mysql]
@@ -40,6 +45,25 @@ class AdminPuntosCargaController extends Controller
     {
         DB::table('cargar')->where('id_punto_carga', $request->id)->delete();
         DB::table('puntos_carga')->delete($request->id);
+
+        return Redirect::to('/admin/puntos-carga');
+    }
+    public function udpate(Request $request): RedirectResponse
+    {
+
+        $fecha_mysql = null;
+
+        if ($request->ultimo_mantenimiento) {
+            // Convierte la fecha al formato de tiempo UNIX
+            $fecha_unix = strtotime($request->ultimo_mantenimiento);
+
+            // Formatea la fecha para MySQL
+            $fecha_mysql = date("Y-m-d", $fecha_unix);
+        }
+
+        DB::table('puntos_carga')
+            ->where('id', $request->id)
+            ->update(['latitud' => $request->latitud, 'longitud' => $request->longitud, 'ubicacion' => $request->ubicacion, 'potencia' => $request->potencia, 'funciona' => $request->funciona, 'ultimo_mantenimiento' => $fecha_mysql]);
 
         return Redirect::to('/admin/puntos-carga');
     }
