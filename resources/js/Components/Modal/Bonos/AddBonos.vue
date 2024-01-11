@@ -3,10 +3,11 @@ import { onMounted, ref } from 'vue';
 import InputError from '@/Components/InputError.vue';
 import { initFlowbite } from 'flowbite'
 import { useForm } from '@inertiajs/vue3';
-import { IconRefresh } from '@tabler/icons-vue';
+import { IconRefresh, IconX } from '@tabler/icons-vue';
 
 onMounted(() => {
     initFlowbite();
+    additionalDescriptions.value.push('');
 })
 
 const form = useForm({
@@ -38,10 +39,7 @@ const addDesc = () => {
 }
 
 const eliminarDes = (index) => {
-    if (index >= 0 && index < additionalDescriptions.value.length) {
     additionalDescriptions.value.splice(index, 1);
-    forceUpdate();
-  }
 }
 
 </script>
@@ -116,12 +114,19 @@ const eliminarDes = (index) => {
 
                             <!-- Mostrar inputs adicionales -->
                             <div class=" h-80 overflow-y-auto">
-                                <div v-for="(description, index) in additionalDescriptions" :key="index">
+                                <div v-for="(description, index) in additionalDescriptions" :key="index" class="flex gap-3">
                                     <input type="text" :name="'des' + index" :id="'des' + index"
                                         v-model="additionalDescriptions[index]"
                                         class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         required>
-                                    <button @click.prevent="">X</button>
+                                    <button @click.prevent="eliminarDes(index)" v-if="index != 0"
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                        <svg class="w-6 h-6 text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
 
@@ -152,8 +157,3 @@ const eliminarDes = (index) => {
         </div>
     </div>
 </template>
-<style>
-.bg-gray-900.bg-opacity-50.dark\:bg-opacity-80.fixed.inset-0.z-40 {
-    opacity: 0.2;
-}
-</style>
