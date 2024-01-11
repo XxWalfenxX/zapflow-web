@@ -28,7 +28,7 @@ const submit = () => {
 const resetForm = () => {
     form.reset()
     form.errors = {}
-    additionalDescriptions.value = []
+    additionalDescriptions.value = ['']
 }
 
 
