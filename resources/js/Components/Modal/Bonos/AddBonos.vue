@@ -114,13 +114,13 @@ const eliminarDes = (index) => {
 
                             <!-- Mostrar inputs adicionales -->
                             <div class=" h-80 overflow-y-auto">
-                                <div v-for="(description, index) in additionalDescriptions" :key="index" class="flex gap-3">
+                                <div v-for="(description, index) in additionalDescriptions" :key="index" class="flex gap-3 mr-4">
                                     <input type="text" :name="'des' + index" :id="'des' + index"
                                         v-model="additionalDescriptions[index]"
                                         class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         required>
                                     <button @click.prevent="eliminarDes(index)" v-if="index != 0"
-                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5  mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                             <path
