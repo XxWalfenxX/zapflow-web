@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPuntosCargaController;
 use App\Http\Controllers\AdminBonosController;
+use App\Http\Controllers\AdminRolesController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
@@ -91,6 +92,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/bonos', [AdminBonosController::class, 'destroy'])->name('admin.bonos.destroy');
     Route::post('/admin/bonos',[AdminBonosController::class, 'store'])->name('admin.bonos.store');
     Route::patch('/admin/bonos',[AdminBonosController::class, 'udpate'])->name('admin.bonos.update');
+
+    Route::get('/admin/roles',[AdminRolesController::class, 'create'])->name('admin.roles');
+    Route::delete('/admin/roles', [AdminRolesController::class, 'destroy'])->name('admin.roles.destroy');
+    Route::post('/admin/roles',[AdminRolesController::class, 'store'])->name('admin.roles.store');
+    Route::patch('/admin/roles',[AdminRolesController::class, 'udpate'])->name('admin.roles.update');
 });
 
 require __DIR__ . '/auth.php';

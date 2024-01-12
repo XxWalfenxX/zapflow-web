@@ -9,10 +9,6 @@ use Inertia\Response;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class AdminPuntosCargaController extends Controller
 {
