@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminPuntosCargaController;
 use App\Http\Controllers\AdminBonosController;
 use App\Http\Controllers\AdminRolesController;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminUsersRolesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
@@ -83,6 +84,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
     Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
     Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
+    Route::get('/admin/users/roles',[AdminUsersRolesController::class, 'create'])->name('admin.usersroles');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
     Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');

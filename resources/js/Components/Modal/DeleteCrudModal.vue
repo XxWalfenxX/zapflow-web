@@ -8,7 +8,7 @@ onMounted(() => {
     initFlowbite();
 })
 
-const props = defineProps(['id', 'url']);
+const props = defineProps(['id', 'url', 'disabled']);
 
 const form = useForm({
     id: '',
@@ -27,13 +27,22 @@ const deleteUser = (id) => {
 
 <template>
     <!-- Modal toggle -->
-    <button type="button" :data-modal-target="`deleteModal-${props.id}`" :data-modal-toggle="`deleteModal-${props.id}`"
+    <button type="button" :data-modal-target="`deleteModal-${props.id}`" :data-modal-toggle="`deleteModal-${props.id}`" v-if="!props.disabled"
         class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
             <path
                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
-        </svg></button>
+        </svg>
+    </button>
+    <button type="button" v-if="props.disabled" disabled
+        class="cursor-not-allowed focus:outline-none text-white bg-gray-400 hover:bg-gray-400 focus:ring-4 focus:ring-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
+        </svg>
+    </button>
 
     <!-- Main modal -->
     <div :id="`deleteModal-${props.id}`" tabindex="-1" aria-hidden="true"

@@ -16,7 +16,7 @@ onMounted(() => {
 DataTable.use(DataTablesCore);
 
 defineProps({
-    roles: {
+    userRoles: {
         type: Object,
     },
 
@@ -27,9 +27,6 @@ const options = {
     language: {
         url: '/json/Datatable_es-ES.json'
     },
-    "columnDefs": [
-    { "width": "80%", "targets": 1 }
-  ]
 };
 
 </script>
@@ -41,8 +38,7 @@ const options = {
         <div class="py-12 flex-grow min-h-[80vh]">
 
             <div class="mx-auto sm:px-6 lg:px-8">
-                <h1 class="font-bold text-4xl mb-3 dark:text-white">Gestionar Roles</h1>
-
+                <h1 class="font-bold text-4xl mb-3 dark:text-white">Gestionar Roles Usuarios</h1>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="mb-3">
@@ -52,22 +48,21 @@ const options = {
                             <DataTable :options="options" class="display w-full">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Nombre de Rol</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="rol in roles">
+                                    <tr v-for="rol in userRoles">
                                         <th>
-                                            {{ rol.id }}
+                                            {{ rol.email }}
                                         </th>
                                         <td>
                                             {{ rol.nombre }}
                                         </td>
                                         <td>
-                                            <EditRolCrudModal :key="`update-modal-${rol.id}`" :id="`${rol.id}`" :nombre="rol.nombre" :disabled="rol.nombre == 'user' | rol.nombre == 'admin'" />
-                                            <DeleteCrudModal :key="`delete-modal-${rol.id}`" :id="`${rol.id}`" url="admin.roles.destroy" :disabled="rol.nombre == 'user' | rol.nombre == 'admin'">
+                                            <DeleteCrudModal :key="`delete-modal-${rol.id}`" :id="`${rol.id}`" url="admin.roles.destroy" :disabled="rol.nombre == 'user'">
                                             </DeleteCrudModal>
                                         </td>
                                     </tr>
