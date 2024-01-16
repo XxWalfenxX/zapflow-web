@@ -5,17 +5,15 @@ import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout.vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
-import DeleteCrudModal from '@/Components/Modal/DeleteCrudModal.vue';
 import { initFlowbite } from 'flowbite'
-import AddRolCrudModal from '@/Components/Modal/Roles/AddRolCrudModal.vue';
-import EditRolCrudModal from '@/Components/Modal/Roles/EditRolCrudModal.vue';
+import EditRolCrudModal from '@/Components/Modal/Users/Roles/EditRolCrudModal.vue';
 
 onMounted(() => {
     initFlowbite();
 })
 DataTable.use(DataTablesCore);
 
-defineProps({
+const props = defineProps({
     userRoles: {
         type: Object,
     },
@@ -29,6 +27,31 @@ const options = {
     },
 };
 
+// Función para agrupar por id de usuario con información de roles
+function groupByIdUser(data) {
+  const groupedData = {};
+
+  data.forEach(item => {
+    const idUser = item.id_user;
+    const email = item.email;
+
+    if (!groupedData[idUser]) {
+      groupedData[idUser] = { id_user: idUser, email: email, roles: [] };
+    }
+
+    if (!groupedData[idUser].email.includes(email)) {
+      groupedData[idUser].email += `, ${email}`;
+    }
+
+    const role = { id_roles: item.id_roles, nombre: item.nombre };
+    groupedData[idUser].roles.push(role);
+  });
+
+  return Object.values(groupedData);
+}
+
+const userRolesSorted = groupByIdUser(props.userRoles);
+console.log(userRolesSorted);
 </script>
 
 <template>
@@ -41,29 +64,25 @@ const options = {
                 <h1 class="font-bold text-4xl mb-3 dark:text-white">Gestionar Roles Usuarios</h1>
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <div class="mb-3">
-                            <AddRolCrudModal />
-                        </div>
                         <div class="relative overflow-x-auto">
                             <DataTable :options="options" class="display w-full">
                                 <thead>
                                     <tr>
                                         <th>Email</th>
-                                        <th>Nombre de Rol</th>
+                                        <th>Roles</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="rol in userRoles">
+                                    <tr v-for="user in userRolesSorted">
                                         <th>
-                                            {{ rol.email }}
+                                            {{ user.email }}
                                         </th>
                                         <td>
-                                            {{ rol.nombre }}
+                                            <span v-for="roles in user.roles" class="text-xs font-medium me-2 px-2.5 py-1.5 rounded-full bg-green-500 text-green-100">{{ roles.nombre }}</span>
                                         </td>
                                         <td>
-                                            <DeleteCrudModal :key="`delete-modal-${rol.id}`" :id="`${rol.id}`" url="admin.roles.destroy" :disabled="rol.nombre == 'user'">
-                                            </DeleteCrudModal>
+                                            <EditRolCrudModal :key="`update-modal-${user.id_user}`" :id="`${user.id_user}`" :email="user.email" />
                                         </td>
                                     </tr>
                                 </tbody>
