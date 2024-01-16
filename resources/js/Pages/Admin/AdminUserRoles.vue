@@ -79,7 +79,7 @@ console.log(userRolesSorted);
                                             {{ user.email }}
                                         </th>
                                         <td>
-                                            <span v-for="roles in user.roles" class="text-xs font-medium me-2 px-2.5 py-1.5 rounded-full bg-green-500 text-green-100">{{ roles.nombre }}</span>
+                                            <span v-for="roles in user.roles" class="text-xs font-medium me-2 px-2.5 py-1.5 rounded-full bg-blue-500 text-blue-100">{{ roles.nombre }}</span>
                                         </td>
                                         <td>
                                             <EditRolCrudModal :key="`update-modal-${user.id_user}`" :id="`${user.id_user}`" :email="user.email" />
