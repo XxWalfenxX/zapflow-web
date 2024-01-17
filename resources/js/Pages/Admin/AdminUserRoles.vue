@@ -54,8 +54,7 @@ function groupByIdUser(data) {
 }
 
 const userRolesSorted = groupByIdUser(props.userRoles);
-console.log(userRolesSorted);
-console.log(props.roles);
+
 </script>
 
 <template>
