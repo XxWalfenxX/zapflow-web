@@ -85,6 +85,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
     Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
     Route::get('/admin/users/roles',[AdminUsersRolesController::class, 'create'])->name('admin.usersroles');
+    Route::patch('/admin/users/roles',[AdminUsersRolesController::class, 'udpate'])->name('admin.usersroles.update');
     Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
     Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');

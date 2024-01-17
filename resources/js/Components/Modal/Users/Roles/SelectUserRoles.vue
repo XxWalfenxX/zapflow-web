@@ -1,0 +1,102 @@
+<script setup>
+import { onMounted, ref, computed, watch } from 'vue';
+import { initFlowbite } from 'flowbite'
+import { useForm } from '@inertiajs/vue3';
+import { IconEdit } from '@tabler/icons-vue';
+
+onMounted(() => {
+    initFlowbite();
+    additionalRoles.value.push('');
+    form.id_user = props.user.id_user
+    additionalRoles.value = props.user.roles
+})
+
+const form = useForm({
+    id_user: '',
+    id_roles: []
+});
+
+const props = defineProps(['user', 'roles'])
+
+const submit = () => {
+
+    form.id_roles = availableRoles.value.filter(role => role.checked).map(role => role.id);
+
+    form.patch(route('admin.usersroles.update'), {
+        preserveScroll: true,
+        onSuccess: () => window.location.reload(),
+        onFinish: () => form.reset(),
+    });
+};
+
+
+const additionalRoles = ref([]);
+
+const searchQuery = ref('');
+
+const availableRoles = computed(() => {
+    return props.roles.map(role => ({
+        ...role,
+        checked: role.id === 0 || additionalRoles.value.some(userRole => userRole.id_roles === role.id),
+        disabled: role.id === 1  // Agrega esta línea para deshabilitar el checkbox del rol de usuario
+    })).filter(role => {
+        const isIncluded = role.nombre.toLowerCase().includes(searchQuery.value.toLowerCase());
+        const isNotAssigned = !props.user.roles.some(userRole => userRole.id_roles === role.id);
+
+        return isIncluded && (isNotAssigned || role.checked);
+    });
+});
+
+</script>
+
+<template>
+    <!-- Modal toggle -->
+    <button :data-dropdown-toggle="`dropdownSearch-${props.user.id_user}`" data-dropdown-placement="bottom"
+        class="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button">
+        Editar Roles
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+        </svg>
+    </button>
+
+    <div :id="`dropdownSearch-${props.user.id_user}`" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
+        <div class="p-3">
+            <label for="input-group-search" class="sr-only">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                </div>
+                <input type="text" id="input-group-search" v-model="searchQuery"
+                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Buscar Roles">
+            </div>
+        </div>
+        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownSearchButton">
+            <li v-for="role in availableRoles" :key="role.id">
+                <div class="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <input :id="'checkbox-item-' + role.id+props.user.id_user" type="checkbox" v-model="role.checked" :disabled="role.disabled"
+                        :class="{ 'text-gray-500 cursor-not-allowed': role.disabled }"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+                    <label :for="'checkbox-item-' + role.id+props.user.id_user" :class="{ 'text-gray-500 cursor-not-allowed': role.disabled }"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                        {{ role.nombre }}
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <a @click="submit"
+            class="cursor-pointer flex items-center p-3 text-sm font-medium border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600">
+            <IconEdit class="mr-1 ml-1 w-6 h-6" />
+            Actualizar Roles
+        </a>
+
+
+    </div>
+</template>

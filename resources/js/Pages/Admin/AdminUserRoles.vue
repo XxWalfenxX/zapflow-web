@@ -6,7 +6,7 @@ import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 import 'datatables.net-responsive';
 import { initFlowbite } from 'flowbite'
-import EditRolCrudModal from '@/Components/Modal/Users/Roles/EditRolCrudModal.vue';
+import SelectUserRoles from '@/Components/Modal/Users/Roles/SelectUserRoles.vue';
 
 onMounted(() => {
     initFlowbite();
@@ -16,6 +16,9 @@ DataTable.use(DataTablesCore);
 const props = defineProps({
     userRoles: {
         type: Object,
+    },
+    roles: {
+        type: Array,
     },
 
 });
@@ -52,6 +55,7 @@ function groupByIdUser(data) {
 
 const userRolesSorted = groupByIdUser(props.userRoles);
 console.log(userRolesSorted);
+console.log(props.roles);
 </script>
 
 <template>
@@ -82,7 +86,7 @@ console.log(userRolesSorted);
                                             <span v-for="roles in user.roles" class="text-xs font-medium me-2 px-2.5 py-1.5 rounded-full bg-blue-500 text-blue-100">{{ roles.nombre }}</span>
                                         </td>
                                         <td>
-                                            <EditRolCrudModal :key="`update-modal-${user.id_user}`" :id="`${user.id_user}`" :email="user.email" />
+                                            <SelectUserRoles :user="user" :roles="roles"/>
                                         </td>
                                     </tr>
                                 </tbody>
