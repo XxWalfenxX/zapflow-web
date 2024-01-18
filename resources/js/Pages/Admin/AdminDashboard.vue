@@ -48,7 +48,7 @@ onMounted(() => {
 
                                     </li>
                                     <li>
-                                        <AdminButtonLink href="#" :active="false">
+                                        <AdminButtonLink :href="route('admin.usersroles')" :active="false">
                                             <svg class="w-4 h-4 me-2 text-gray-800 dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
                                                 <path
@@ -60,7 +60,7 @@ onMounted(() => {
                                         </AdminButtonLink>
                                     </li>
                                     <li>
-                                        <AdminButtonLink href="#" :active="false">
+                                        <AdminButtonLink :href="route('admin.userssuscrip')" :active="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-4 h-4 me-2 text-gray-800 dark:text-white">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -91,7 +91,7 @@ onMounted(() => {
                                             Puntos de Carga</h2>
                                     </li>
                                     <li>
-                                        <AdminButtonLink href="#" :active="false">
+                                        <AdminButtonLink :href="route('admin.puntosc')" :active="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"
                                                 class="w-4 h-4 me-2 text-gray-800 dark:text-white">
@@ -109,7 +109,7 @@ onMounted(() => {
                                             Bonos</h2>
                                     </li>
                                     <li>
-                                        <AdminButtonLink href="#" :active="false">
+                                        <AdminButtonLink :href="route('admin.bonos')" :active="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"
                                                 class="w-4 h-4 me-2 text-gray-800 dark:text-white">
@@ -127,7 +127,7 @@ onMounted(() => {
                                             Roles</h2>
                                     </li>
                                     <li>
-                                        <AdminButtonLink href="#" :active="false">
+                                        <AdminButtonLink :href="route('admin.roles')" :active="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"
                                                 class="w-4 h-4 me-2 text-gray-800 dark:text-white">

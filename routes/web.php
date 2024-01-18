@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminBonosController;
 use App\Http\Controllers\AdminRolesController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUsersRolesController;
+use App\Http\Controllers\AdminUsersSubsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
@@ -84,13 +85,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/users',[AdminUsersController::class, 'create'])->name('admin.users');
     Route::post('/admin/users',[AdminUsersController::class, 'store'])->name('admin.users.store');
     Route::patch('/admin/users',[AdminUsersController::class, 'udpate'])->name('admin.users.update');
+    Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
+
     Route::get('/admin/users/roles',[AdminUsersRolesController::class, 'create'])->name('admin.usersroles');
     Route::patch('/admin/users/roles',[AdminUsersRolesController::class, 'udpate'])->name('admin.usersroles.update');
-    Route::delete('/admin/users', [AdminUsersController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::get('/admin/users/suscripciones',[AdminUsersSubsController::class, 'create'])->name('admin.userssuscrip');
+    Route::patch('/admin/users/suscripciones',[AdminUsersSubsController::class, 'udpate'])->name('admin.userssuscrip.update');
+
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
     Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');
     Route::delete('/admin/puntos-carga', [AdminPuntosCargaController::class, 'destroy'])->name('admin.puntosc.destroy');
     Route::patch('/admin/puntos-carga', [AdminPuntosCargaController::class, 'udpate'])->name('admin.puntosc.update');
+
     Route::get('/admin/bonos',[AdminBonosController::class, 'create'])->name('admin.bonos');
     Route::delete('/admin/bonos', [AdminBonosController::class, 'destroy'])->name('admin.bonos.destroy');
     Route::post('/admin/bonos',[AdminBonosController::class, 'store'])->name('admin.bonos.store');
