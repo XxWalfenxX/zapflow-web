@@ -10,16 +10,27 @@ onMounted(() => {
 })
 
 const form = useForm({
-    nombre: '',
+    idUser: '',
+    idBono: '',
 });
 
 const submit = () => {
-    form.post(route('admin.roles.store'), {
+    form.post(route('admin.userssuscrip.store'), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
         onFinish: () => form.reset(),
     });
 };
+
+const props = defineProps({
+    bonosAvail: {
+        type: Array,
+    },
+    usersAvail: {
+        type: Array,
+    },
+
+});
 
 const resetForm = () => {
     form.reset()
@@ -67,19 +78,26 @@ const resetForm = () => {
                 <!-- Modal body -->
                 <form @submit.prevent="submit">
                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                        <div>
+                            <label for="user"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario</label>
+                            <select id="user" v-model="form.idUser"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option v-for="user in usersAvail" :value="user.id">{{ user.email }}</option>
+                            </select>
 
-                        <div class="mb-2 sm:col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-                            <input type="text" name="name" id="name" v-model="form.nombre"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Users" required>
+                        </div>
+                        <div>
+                            <label for="bono"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bono</label>
+                            <select id="bono" v-model="form.idBono"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option v-for="bono in bonosAvail" :value="bono.id">{{ bono.nombre }}</option>
+                            </select>
                         </div>
 
                     </div>
-                    <InputError class="my-2" :message="form.errors.password" />
-                    <InputError class="my-2" :message="form.errors.name" />
-                    <InputError class="my-2" :message="form.errors.email" />
+                    <InputError class="my-2" :message="form.errors[0]" />
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -88,9 +106,9 @@ const resetForm = () => {
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Agregar Rol
+                        Agregar Bono
                     </button>
-                    <button @click="resetForm"
+                    <button @click="resetForm" type="button"
                         class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">
                         <IconRefresh class="mr-1 -ml-1 w-6 h-6" />
                         Limpiar

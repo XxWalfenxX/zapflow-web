@@ -9,6 +9,9 @@ use Inertia\Response;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 class AdminUsersSubsController extends Controller
 {
@@ -21,7 +24,8 @@ class AdminUsersSubsController extends Controller
                 ->select('tener.*', 'users.email', 'suscripciones.nombre')
                 ->get(),
 
-            'bonosAvail' => DB::table('suscripciones')->select('id', 'nombre')->get()
+            'bonosAvail' => DB::table('suscripciones')->select('id', 'nombre')->get(),
+            'usersAvail' => DB::table('users')->select('id', 'email')->get()
         ]);
     }
 
@@ -46,7 +50,24 @@ class AdminUsersSubsController extends Controller
 
         // Agregar nuevos bonos
         foreach ($bonosAgregar as $rol) {
-            DB::table('tener')->insert(['id_user' => $request->id_user, 'id_subscripciones' => $rol]);
+            DB::table('tener')->insert(['id_user' => $request->id_user, 'id_subscripciones' => $rol, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)') ]);
+        }
+
+        return Redirect::to('/admin/users/suscripciones');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $result = DB::table('tener')->where('id_user', $request->idUser)->where('id_subscripciones',$request->idBono)->first();
+
+        if ($result) {
+            return redirect(url()->previous())
+                    ->withErrors('Usuario con bono existente')
+                    ->withInput();
+        } else {
+            DB::table('tener')->insert(
+                ['id_user' => $request->idUser, 'id_subscripciones' => $request->idBono, 'fecha_inicio' =>  DB::raw('CURDATE()'), 'fecha_fin' => DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)')]
+            );
         }
 
         return Redirect::to('/admin/users/suscripciones');

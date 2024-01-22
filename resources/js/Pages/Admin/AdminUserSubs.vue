@@ -21,6 +21,9 @@ const props = defineProps({
     bonosAvail: {
         type: Array,
     },
+    usersAvail: {
+        type: Array,
+    },
 
 });
 
@@ -68,7 +71,7 @@ const userBonosSorted = groupByIdUser(props.userSubs);
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="mb-3">
-                            <AddUsersSubsModal />
+                            <AddUsersSubsModal :bonos-avail="bonosAvail" :users-avail="usersAvail"/>
                         </div>
                         <div class="relative overflow-x-auto">
                             <DataTable :options="options" class="display w-full">
