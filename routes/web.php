@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminPuntosCargaController;
 use App\Http\Controllers\AdminBonosController;
 use App\Http\Controllers\AdminRolesController;
+use App\Http\Controllers\AdminUsersCarVehController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUsersRolesController;
 use App\Http\Controllers\AdminUsersSubsController;
@@ -93,6 +94,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/users/suscripciones',[AdminUsersSubsController::class, 'create'])->name('admin.userssuscrip');
     Route::patch('/admin/users/suscripciones',[AdminUsersSubsController::class, 'udpate'])->name('admin.userssuscrip.update');
     Route::post('/admin/users/suscripciones',[AdminUsersSubsController::class, 'store'])->name('admin.userssuscrip.store');
+
+    Route::get('/admin/users/carga-vehiculos',[AdminUsersCarVehController::class, 'create'])->name('admin.userscarveh');
+    Route::patch('/admin/users/carga-vehiculos',[AdminUsersCarVehController::class, 'udpate'])->name('admin.userscarveh.update');
+    Route::post('/admin/users/carga-vehiculos',[AdminUsersCarVehController::class, 'store'])->name('admin.userscarveh.store');
 
     Route::get('/admin/puntos-carga',[AdminPuntosCargaController::class, 'create'])->name('admin.puntosc');
     Route::post('/admin/puntos-carga',[AdminPuntosCargaController::class, 'store'])->name('admin.puntosc.store');
