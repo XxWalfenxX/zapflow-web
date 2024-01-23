@@ -49,7 +49,7 @@ const resetForm = () => {
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M9 1v16M1 9h16" />
         </svg>
-        Agregar bono a usuario
+        Agregar Vehiculo a un Punto
     </button>
 
     <!-- Main modal -->
