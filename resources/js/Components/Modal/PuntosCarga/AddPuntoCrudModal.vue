@@ -38,7 +38,11 @@ const resetForm = () => {
 
 let map = ref(null);
 let mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-
+let icono = L.icon({
+            iconUrl: '/img/marker-icon.png',
+            shadowUrl: '/img/marker-shadow.png',
+        });
+        
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     mapURL =
         'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
@@ -59,7 +63,7 @@ const createMaplayer = () => {
                 }
                 form.latitud = e.latlng.lat
                 form.longitud = e.latlng.lng
-                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map.value)
+                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true, icon: icono }).addTo(map.value)
                 marcador.on('dragend', function (e) {
                     let position = marcador.getLatLng();
                     form.latitud = position.lat

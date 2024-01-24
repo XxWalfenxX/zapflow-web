@@ -24,6 +24,10 @@ const props = defineProps({
 
 let map = ref(null);
 let mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+let icono = L.icon({
+            iconUrl: '/img/marker-icon.png',
+            shadowUrl: '/img/marker-shadow.png',
+        });
 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     mapURL =
@@ -34,7 +38,7 @@ const createMaplayer = () => {
     setTimeout(() => {
         map.value = L.map(`mapWatchContainer-${props.punto.id}`).setView([props.punto.latitud, props.punto.longitud], 18);
         L.tileLayer(mapURL).addTo(map.value);
-        L.marker([props.punto.latitud, props.punto.longitud]).addTo(map.value);
+        L.marker([props.punto.latitud, props.punto.longitud], {icon: icono}).addTo(map.value);
     }, 0);
 
 };

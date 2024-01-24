@@ -7,6 +7,10 @@ export default {
     setup() {
         let map = ref(null);
         let mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        let icono = L.icon({
+            iconUrl: '/img/marker-icon.png',
+            shadowUrl: '/img/marker-shadow.png',
+        });
         const currentEstacion = ref(null);
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -21,7 +25,7 @@ export default {
             if (state.listaPuntos.length > 0) {
                 state.listaPuntos.forEach((feature) => {
                     const coordinates = feature.geometry.coordinates.reverse();
-                    const marker = L.marker(coordinates)
+                    const marker = L.marker(coordinates, {icon: icono})
                         .addTo(map.value)
                         .on('click', () => {
                             currentEstacion.value = feature;
@@ -75,7 +79,7 @@ export default {
         onMounted(() => {
             obtenerPuntos().then((punto) => {
                 state.listaPuntos = punto;
-                obtenerPuntosOcupados().then((puntoOcupado) =>{
+                obtenerPuntosOcupados().then((puntoOcupado) => {
                     state.listaPuntosOcupados = puntoOcupado
                     createMaplayer();
                 })
@@ -107,7 +111,8 @@ export default {
             </h5>
             <div v-else>
                 <div v-if="currentEstacion.properties.funciona === 1">
-                    <div v-if="state.listaPuntosOcupados && state.listaPuntosOcupados.some(station => station.id === currentEstacion.properties.id)">
+                    <div
+                        v-if="state.listaPuntosOcupados && state.listaPuntosOcupados.some(station => station.id === currentEstacion.properties.id)">
                         <img src="img/puntoOcupado.png" alt="Punto de carga estado">
                     </div>
                     <div v-else>

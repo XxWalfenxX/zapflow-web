@@ -69,7 +69,7 @@ if (props.bonoInfo.length !== 0 && props.bonoInfo[0].fecha_fin !== undefined) {
                             <div class="h-[64px] w-[3px] bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
                             <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-500">
                                 <div class="flex h-[572px] m-4">
-                                    <img src="/img/zcard.png" alt="Z-Card" class="object-contain">
+                                    <img src="/img/ZCard.png" alt="Z-Card" class="object-contain">
                                 </div>
                             </div>
                         </div>

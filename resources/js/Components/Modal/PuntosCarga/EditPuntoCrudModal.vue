@@ -52,6 +52,10 @@ const submit = () => {
 
 let map = ref(null);
 let mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+let icono = L.icon({
+            iconUrl: '/img/marker-icon.png',
+            shadowUrl: '/img/marker-shadow.png',
+        });
 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     mapURL =
@@ -65,7 +69,7 @@ const createMaplayer = () => {
         if (map.value == null) {
             map.value = L.map(`mapEditContainer-${props.punto.id}`).setView([props.punto.latitud, props.punto.longitud], 14);
             L.tileLayer(mapURL).addTo(map.value);
-            marcador = new L.Marker([props.punto.latitud, props.punto.longitud], { draggable: true }).addTo(map.value)
+            marcador = new L.Marker([props.punto.latitud, props.punto.longitud], { draggable: true, icon: icono }).addTo(map.value)
 
             map.value.on('click', function (e) {
                 if (marcador) {
@@ -73,7 +77,7 @@ const createMaplayer = () => {
                 }
                 form.latitud = e.latlng.lat
                 form.longitud = e.latlng.lng
-                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true }).addTo(map.value)
+                marcador = new L.Marker([e.latlng.lat, e.latlng.lng], { draggable: true, icon: icono }).addTo(map.value)
                 marcador.on('dragend', function (e) {
                     let position = marcador.getLatLng();
                     form.latitud = position.lat
