@@ -42,7 +42,7 @@ const props = defineProps(['punto'])
 const submit = () => {
     form.ultimo_mantenimiento = dateValue.value
     console.log(form.funciona);
-    
+
     form.patch(route('admin.puntosc.update'), {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
@@ -57,10 +57,6 @@ let icono = L.icon({
             shadowUrl: '/img/marker-shadow.png',
         });
 
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    mapURL =
-        'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
-}
 
 
 let marcador = null;

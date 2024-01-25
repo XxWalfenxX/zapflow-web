@@ -43,10 +43,6 @@ let icono = L.icon({
             shadowUrl: '/img/marker-shadow.png',
         });
         
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    mapURL =
-        'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
-}
 
 
 let marcador = null;

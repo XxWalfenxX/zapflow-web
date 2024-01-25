@@ -13,10 +13,7 @@ export default {
         });
         const currentEstacion = ref(null);
 
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            mapURL =
-                'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
-        }
+
 
         const createMaplayer = () => {
             map.value = L.map('mapContainer').setView([41.3732, 2.154], 12);
