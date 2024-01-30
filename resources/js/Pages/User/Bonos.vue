@@ -55,7 +55,7 @@ const puedeRenovar = (bonoId) => {
 
                 <div v-for="bono in listaBonos" :key="bono.id">
                     <BonoCard :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio"
-                        :renovar="puedeRenovar(bono.id)" :suscrito="estaSuscrito(bono.id)" />
+                        :renovar="puedeRenovar(bono.id)" :suscrito="estaSuscrito(bono.id)" :id="bono.id" />
 
                 </div>
 

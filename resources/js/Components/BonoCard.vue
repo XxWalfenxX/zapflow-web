@@ -4,6 +4,8 @@
 import { CheckIcon } from "@heroicons/vue/20/solid";
 
 defineProps({
+    id:{
+    },
     nombre: {
         type: String,
     },
@@ -59,11 +61,11 @@ defineProps({
                                 disabled>Ya estás suscrito</button>
                         </div>
                         <div v-else-if="renovar == true">
-                            <a href="#"
+                            <a :href="route('user.payment', [id])"
                                 class="mt-10 block w-full rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Renovar
                             </a>
                         </div>
-                        <a href="#" v-else
+                        <a :href="route('user.payment', [id])" v-else
                             class="mt-10 block w-full rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Suscribirse
                         </a>
                     </div>

@@ -36,7 +36,7 @@ defineProps({
         <div
             class=" "
         >
-            <BonoCard v-for="bono in bonos" :key="bono.id" :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio"/>
+            <BonoCard v-for="bono in bonos" :key="bono.id" :nombre="bono.nombre" :descripcion="bono.descripcion" :precio="bono.precio" :id="bono.id"/>
 
         </div>
     </GuestLayout>

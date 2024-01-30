@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminUsersRolesController;
 use App\Http\Controllers\AdminUsersSubsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserBonosController;
 use App\Http\Controllers\UserBonosHistoryController;
@@ -71,8 +72,13 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/mis-vehiculos', function(){
         return Inertia::render('User/Vehiculos');
     })->name('vehiculos');
+
+    Route::get('/pay/{id}', [PaymentDetailsController::class, 'create'])->name('user.payment');
+    Route::post('/pay', [PaymentDetailsController::class, 'store'])->name('user.payment.store');
+
     Route::get('/mis-bonos', [UserBonosController::class, 'create'])->name('user.bonos');
     Route::get('/mis-compras', [UserBonosHistoryController::class, 'create'])->name('user.bonosComprados');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
