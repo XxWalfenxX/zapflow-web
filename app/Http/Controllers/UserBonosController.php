@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\DB;
 
 class UserBonosController extends Controller
 {
-    public function create(Request $request): Response{
+    public function create(Request $request): Response
+    {
         $user = $request->user();
 
         $dbListaBonos = DB::table('suscripciones')->get();
 
-        foreach ($dbListaBonos as &$data ){
+        foreach ($dbListaBonos as &$data) {
             $data->descripcion = explode("/", $data->descripcion);
         }
 
         return Inertia::render('User/Bonos', [
             'bonosUsuario' =>  DB::table('tener')
-                            ->join('suscripciones', 'suscripciones.id', '=', 'tener.id_subscripciones')
-                            ->select('suscripciones.id', 'tener.fecha_fin')->where('id_user', $user->id)
-                            ->get(),
+                ->select('suscripciones.id', DB::raw('MAX(tener.fecha_inicio) AS fecha_inicio'), 'tener.fecha_fin')
+                ->join('suscripciones', 'suscripciones.id', '=', 'tener.id_subscripciones')
+                ->where('tener.id_user', '=', $user->id)
+                ->groupBy('suscripciones.id', 'tener.fecha_fin')
+                ->orderBy('tener.fecha_inicio', 'desc')
+                ->get(),
             'listaBonos' => $dbListaBonos
         ]);
     }
