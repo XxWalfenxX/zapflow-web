@@ -1,7 +1,7 @@
 <script setup>
 import DashboardLayout from '@/Layouts/DashboardLayout.vue'
 import { Head } from '@inertiajs/vue3';
-import { IconShoppingCartCheck } from "@tabler/icons-vue";
+import { IconShoppingCartCheck, IconDownload } from "@tabler/icons-vue";
 const props = defineProps({
     bonosComprados: {
         type: Array,
@@ -26,11 +26,11 @@ const convertirFecha = (fecha) => {
                     <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Lista de Bonos comprados</h5>
                 </div>
                 <div class="flow-root">
-                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" >
+                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                         <li class="py-3 sm:py-4" v-for="bono in bonosComprados">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <IconShoppingCartCheck/>
+                                    <IconShoppingCartCheck />
                                 </div>
                                 <div class="flex-1 min-w-0 ms-4">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -40,9 +40,14 @@ const convertirFecha = (fecha) => {
                                         Fecha de compra: {{ convertirFecha(bono.fecha_inicio) }}
                                     </p>
                                 </div>
-                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-2">
                                     {{ bono.precio }}€
                                 </div>
+                                <a :href="route('pdf')"
+                                    class="text-gray-700 border border-gray-700 hover:bg-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:focus:ring-gray-800 dark:hover:bg-gray-500">
+                                    <IconDownload/>
+                                    <span class="sr-only">Icon description</span>
+                            </a>
                             </div>
                         </li>
                     </ul>
