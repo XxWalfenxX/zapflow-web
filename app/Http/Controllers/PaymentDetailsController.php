@@ -20,8 +20,7 @@ class PaymentDetailsController extends Controller
     }
     public function store(Request $request): RedirectResponse
     {
-        $result = DB::table('tener')->where('id_user', $request->idUser)->where('id_subscripciones',$request->idBono)->where('fecha_fin','>', DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)'))->first();
-
+        $result = DB::table('tener')->where('id_user', $request->idUser)->where('id_subscripciones',$request->idBono)->where('fecha_fin','>=', DB::raw('DATE_ADD(CURDATE(), INTERVAL 1 YEAR)'))->first();
 
         if ($result) {
             return redirect(url()->previous())

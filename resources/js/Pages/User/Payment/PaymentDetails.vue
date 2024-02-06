@@ -2,7 +2,10 @@
 import { Head } from '@inertiajs/vue3';
 import { useForm, usePage } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import InputError from '@/Components/InputError.vue';
+import { Modal } from 'flowbite';
+import { onMounted } from 'vue';
+import { IconCircleX } from "@tabler/icons-vue";
+
 const props = defineProps({
     bono: {
         type: Array,
@@ -16,7 +19,28 @@ const form = useForm({
 });
 
 const user = usePage().props.auth.user;
+let targetEl
+// set the modal menu element
+onMounted(() => {
+    targetEl = document.getElementById('modalEl');
+    // Ahora $targetEl contiene el elemento modal y puedes usarlo según sea necesario
+});
 
+// options with default values
+const options = {
+    backdrop: 'dynamic',
+    backdropClasses:
+        'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+    closable: true,
+};
+
+// instance options object
+const instanceOptions = {
+    id: 'modalEl',
+    override: true
+};
+
+let modal
 
 const submit = () => {
     form.idBono = props.bono[0].id
@@ -25,8 +49,13 @@ const submit = () => {
         preserveScroll: true,
         onSuccess: () => window.location.reload(),
         onFinish: () => form.reset(),
+        onError: () => {
+            modal = new Modal(targetEl, options, instanceOptions);
+            modal.show();
+        }
     });
 };
+
 
 </script>
 <template>
@@ -106,13 +135,38 @@ const submit = () => {
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                                             Pagar Ahora
                                         </button>
-                                        <InputError class="my-2" :message="form.errors[0]" />
                                     </div>
                                 </div>
 
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalEl" tabindex="-1"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <a type="button" :href="route('bonos')"
+                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </a>
+                    <div class="p-4 md:p-5 text-center">
+                        <IconCircleX class="mx-auto mb-4 text-red-600 w-32 h-32" />
+                        <h3 class="mb-5 text-3xl font-bold">Error</h3>
+                        <h4 class="mb-5 text-normal font-normal text-gray-500 dark:text-gray-400">El bono solicitado sigue
+                            vigente</h4>
+                        <a type="button" :href="route('bonos')"
+                            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            OK
+                        </a>
                     </div>
                 </div>
             </div>
