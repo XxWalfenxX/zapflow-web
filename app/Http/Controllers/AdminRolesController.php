@@ -22,9 +22,17 @@ class AdminRolesController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        DB::table('roles')->insertGetId(
-            ['nombre' => $request->nombre]
-        );
+        $result = DB::table('roles')->where('nombre', $request->nombre)->first();
+
+        if ($result) {
+            return redirect(url()->previous())
+                    ->withErrors('Rol existente')
+                    ->withInput();
+        } else {
+            DB::table('roles')->insertGetId(
+                ['nombre' => $request->nombre]
+            );
+        }
 
         return Redirect::to('/admin/roles');
     }

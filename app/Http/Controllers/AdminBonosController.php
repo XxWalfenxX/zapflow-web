@@ -26,9 +26,17 @@ class AdminBonosController extends Controller
 
         $res = implode('/', $request->des);
 
-        DB::table('suscripciones')->insertGetId(
-            ['nombre' => $request->name, 'descripcion' => $res, 'precio' => $request->precio]
-        );
+        $result = DB::table('suscripciones')->where('nombre', $request->name)->first();
+
+        if ($result) {
+            return redirect(url()->previous())
+                    ->withErrors('Bono existente')
+                    ->withInput();
+        } else {
+            DB::table('suscripciones')->insertGetId(
+                ['nombre' => $request->name, 'descripcion' => $res, 'precio' => $request->precio]
+            );
+        }
 
         return Redirect::to('/admin/bonos');
     }
