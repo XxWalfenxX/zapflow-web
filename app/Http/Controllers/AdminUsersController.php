@@ -58,6 +58,12 @@ class AdminUsersController extends Controller
 
     public function udpate(Request $request): RedirectResponse
     {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:' . User::class
+        ]);
+
         if ($request->password == null || $request->password == '') {
             DB::table('users')
                 ->where('id', $request->id)
