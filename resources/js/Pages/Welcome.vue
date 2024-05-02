@@ -23,12 +23,14 @@ const people = [
         role: "Co-Founder / CEO",
         imageUrl:
             "https://lh3.googleusercontent.com/ogw/AKPQZvyy8LiR_C8Vdhri_mM1aDGRuv_jqTS3XOh_f21u",
+        ipop: "https://sites.google.com/bemen3.cat/lipop-de-manel-botet/autoconeixement"
     },
     {
         name: "Marc Lecha",
         role: "Co-Founder / CEO",
         imageUrl:
             "https://lh3.googleusercontent.com/a/ACg8ocIv3YnxI72EJlMaH1UI6RZcA4pZyyIKMABR1felycw4Z6aiKfU5g5rEdUuFoSVHKnKk6exsJJOLqrOW00PwOWMorg",
+        ipop: "https://sites.google.com/bemen3.cat/pop-marc-lecha/inicio"
     },
 ];
 
@@ -168,7 +170,9 @@ const people = [
                 <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
                     <li v-for="person in people" :key="person.name">
                         <div class="flex items-center gap-x-6">
+                            <a :href="person.ipop">
                             <img class="h-16 w-16 rounded-full" :src="person.imageUrl" alt="" />
+                            </a>
                             <div>
                                 <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900 dark:text-white">
                                     {{ person.name }}
